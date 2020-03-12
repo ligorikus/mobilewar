@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(GameResourceSeeder::class);
+        $this->call(MapFieldTypeSeeder::class);
         $this->call(MapSeeder::class);
     }
 }

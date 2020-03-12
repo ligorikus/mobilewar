@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class GameResource extends Model
 {
     use Cachable;
+
+    public $timestamps = false;
 }

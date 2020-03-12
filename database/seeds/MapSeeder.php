@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
-use App\Model\GameResource;
 use App\Model\MapField;
+use App\Model\MapFieldType;
 
 class MapSeeder extends Seeder
 {
@@ -14,128 +14,29 @@ class MapSeeder extends Seeder
      */
     public function run()
     {
-    	$game_resources = GameResource::all();
-    	$clay  = $game_resources->where('title', 'clay')->first();
-    	$wood = $game_resources->where('title', 'wood')->first();
-    	$iron = $game_resources->where('title', 'iron')->first();
-    	$corn = $game_resources->where('title', 'corn')->first();
-        $max_x = 32;
-       	$max_y = 32;
-       	$map_fields = new Collection();
-       	for ($i = 0; $i < $max_x; $i++) {
-       		for ($j = 0; $j < $max_y; $j++) {
+        $size = (int)$this->command->ask("Enter size of the world", 32);
+
+        $map_field_types = MapFieldType::all();
+
+       	for ($i = 0; $i < $size; $i++) {
+       		for ($j = 0; $j < $size; $j++) {
        			$map_field = MapField::create(['x_coord' => $i, 'y_coord' => $j]);
        			$generator = rand(0, 100);
        			if ($generator <= 50) {
-       				$map_field->resources()->create([
-       					'game_resource_id' => $corn->id,
-       					'count' => 6
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $clay->id,
-       					'count' => 4
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $wood->id,
-       					'count' => 4
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $iron->id,
-       					'count' => 4
-       				]);
+       				$map_field->map_field_type_id = $map_field_types->where('name', 'default')->first()->id;
        			} elseif ($generator <= 65) {
-       				$map_field->resources()->create([
-       					'game_resource_id' => $corn->id,
-       					'count' => 9
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $clay->id,
-       					'count' => 3
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $wood->id,
-       					'count' => 3
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $iron->id,
-       					'count' => 3
-       				]);
+       				$map_field->map_field_type_id = $map_field_types->where('name', 'corn_land')->first()->id;
        			} elseif ($generator <= 70) {
-       				$map_field->resources()->create([
-       					'game_resource_id' => $corn->id,
-       					'count' => 15
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $clay->id,
-       					'count' => 1
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $wood->id,
-       					'count' => 1
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $iron->id,
-       					'count' => 1
-       				]);
+       				$map_field->map_field_type_id = $map_field_types->where('name', 'super_corn_land')->first()->id;
        			} elseif ($generator <= 80) {
-       				$what_less = rand();
-       				$map_field->resources()->create([
-       					'game_resource_id' => $corn->id,
-       					'count' => 6
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $clay->id,
-       					'count' => 5
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $wood->id,
-       					'count' => $what_less ? 4 : 3
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $iron->id,
-       					'count' => $what_less ? 3 : 4
-       				]);
+       				$map_field->map_field_type_id = rand(0, 1) ? $map_field_types->where('name', 'clay_land_less_wood')->first()->id : $map_field_types->where('name', 'clay_land_less_iron')->first()->id;
        			} elseif ($generator <= 90) {
-       				$what_less = rand();
-       				$map_field->resources()->create([
-       					'game_resource_id' => $corn->id,
-       					'count' => 6
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $clay->id,
-       					'count' => $what_less ? 4 : 3
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $wood->id,
-       					'count' => 5
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $iron->id,
-       					'count' => $what_less ? 3 : 4
-       				]);
+              $map_field->map_field_type_id = rand(0, 1) ? $map_field_types->where('name', 'wood_land_less_iron')->first()->id : $map_field_types->where('name', 'wood_land_less_clay')->first()->id;       				
        			} else {
-       				$what_less = rand();
-       				$map_field->resources()->create([
-       					'game_resource_id' => $corn->id,
-       					'count' => 6
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $clay->id,
-       					'count' => $what_less ? 4 : 3
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $wood->id,
-       					'count' => $what_less ? 3 : 4
-       				]);
-       				$map_field->resources()->create([
-       					'game_resource_id' => $iron->id,
-       					'count' => 5
-       				]);
+              $map_field->map_field_type_id = rand(0, 1) ? $map_field_types->where('name', 'iron_land_less_wood')->first()->id : $map_field_types->where('name', 'iron_land_less_clay')->first()->id;              				
        			}
+            $map_field->save();
        		}
        	}
-       	
-
-
     }
 }

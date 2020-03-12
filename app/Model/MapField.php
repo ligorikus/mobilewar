@@ -11,11 +11,8 @@ class MapField extends Model
 
 	protected $fillable = [
 		'x_coord',
-		'y_coord'
+		'y_coord',
+		'map_field_type_id'
 	];
-
-    public function resources()
-    {
-    	return $this->hasMany(MapFieldResource::class);
-    }
+	public $timestamps = false;
 }

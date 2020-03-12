@@ -17,7 +17,12 @@ class CreateMapFieldsTable extends Migration
             $table->increments('id');
             $table->integer('x_coord');
             $table->integer('y_coord');
-            $table->timestamps();
+            $table->unsignedInteger('map_field_type_id')->nullable();
+
+            $table->foreign('map_field_type_id')
+                ->references('id')
+                ->on('map_field_types')
+                ->onDelete('set null');
         });
     }
 

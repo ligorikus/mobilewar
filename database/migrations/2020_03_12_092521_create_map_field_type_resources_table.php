@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMapFieldResourcesTable extends Migration
+class CreateMapFieldTypeResourcesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,20 @@ class CreateMapFieldResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('map_field_resources', function (Blueprint $table) {
+        Schema::create('map_field_type_resources', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('map_field_id')->index();
+            $table->unsignedInteger('map_field_type_id')->nullable();
             $table->unsignedInteger('game_resource_id')->index();
             $table->unsignedInteger('count');
-            $table->timestamps();
 
+            $table->foreign('map_field_type_id')
+                ->references('id')
+                ->on('map_field_types')
+                ->onDelete('cascade');
 
             $table->foreign('game_resource_id')
                 ->references('id')
                 ->on('game_resources')
-                ->onDelete('cascade');
-
-            $table->foreign('map_field_id')
-                ->references('id')
-                ->on('map_fields')
                 ->onDelete('cascade');
         });
     }
@@ -40,6 +38,6 @@ class CreateMapFieldResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('map_field_resources');
+        Schema::dropIfExists('map_field_type_resources');
     }
 }

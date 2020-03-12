@@ -17,7 +17,6 @@ class CreateGameResourcesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->unsignedInteger('image_id')->nullable();
-            $table->timestamps();
             
             $table->foreign('image_id')
                 ->references('id')
