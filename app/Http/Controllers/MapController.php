@@ -11,7 +11,7 @@ class MapController extends Controller
     public function index(Request $request)
     {
     	$size = 8;
-    	$max_n = (int)sqrt(MapField::all()->count());
+    	$max_n = (int)sqrt(MapField::count());
     	$x_coord = 8;
     	$y_coord = 8;
     	if ($request->x !== null) {
