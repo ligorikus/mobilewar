@@ -1,4 +1,3 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
@@ -7,3 +6,16 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.map {
+
+}
+
+.map__row {
+	display:flex;
+}
+
+.map__col {
+	width: 25px;
+	heigth: 25px;
+}

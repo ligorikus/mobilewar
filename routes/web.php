@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/farms', 'FarmController@index')->name('farms.index');
+
+Route::get('/map/{x?}/{y?}', 'MapController@index')->name('maps.index');
