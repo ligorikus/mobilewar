@@ -10,33 +10,39 @@ class MapController extends Controller
 {
     public function index(Request $request)
     {
-    	$size = 8;
+    	$size = 11;
     	$max_n = (int)sqrt(MapField::count());
-    	$x_coord = 8;
-    	$y_coord = 8;
+    	$main_user_village = \auth()->user()->map_fields()->first();
+    	$x_coord = $main_user_village->x_coord;
+    	$y_coord = $main_user_village->y_coord;
     	if ($request->x !== null) {
     		$x_coord = $request->x;
     	}
     	if ($request->y !== null) {
     		$y_coord = $request->y;
     	}
-    	$start_x = $x_coord - $size / 2 >= 0 ? $x_coord - $size / 2 : 0;
-    	$end_x = $x_coord + $size / 2 <= $max_n ? $x_coord + $size / 2 : $max_n;
+    	$start_x = $x_coord - floor($size / 2) >= 0 ? $x_coord - floor($size / 2) : 0;
+    	$end_x = $x_coord + floor($size / 2) <= $max_n ? $x_coord + floor($size / 2) : $max_n;
 
-    	$start_y = $y_coord - $size / 2 >= 0 ? $y_coord - $size / 2 : 0;
-    	$end_y = $y_coord + $size / 2 <= $max_n ? $y_coord + $size / 2 : $max_n;
+    	$start_y = $y_coord - floor($size / 2) >= 0 ? $y_coord - floor($size / 2) : 0;
+    	$end_y = $y_coord + floor($size / 2) <= $max_n ? $y_coord + floor($size / 2) : $max_n;
 
-    	$map_fields = MapField::where('x_coord', '>=', $start_x)
-    		->where('x_coord', '<', $end_x)
+    	$map_fields = MapField::with('users')
+    		->where('x_coord', '>=', $start_x)
+    		->where('x_coord', '<=', $end_x)
     		->where('y_coord', '>=', $start_y)
-    		->where('y_coord', '<', $end_y)
+    		->where('y_coord', '<=', $end_y)
     		->get();
     	
     	$map_field_types = MapFieldType::all();
     	$map = [];
-    	for ($i = $start_x; $i < $end_x; $i++) {
-    		for ($j = $start_y; $j < $end_y; $j++) {
+    	for ($i = $start_x; $i <= $end_x; $i++) {
+    		for ($j = $start_y; $j <= $end_y; $j++) {
     			$map_field = $map_fields->where('x_coord', $i)->where('y_coord', $j)->first();
+    			if ($map_field->users->count() > 0) {
+    				$map[$i][$j] = 'new_village';
+    				continue;
+    			}
     			switch ($map_field_types->where('id', $map_field->map_field_type_id)->first()->name) {
     			 	case 'default':
     			 	case 'corn_land':

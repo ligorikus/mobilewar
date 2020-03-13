@@ -10,6 +10,7 @@
 		<header></header>
 		<nav>
 			<a href="">Фермы</a>
+			<a href="{{route('maps.index')}}">Карта</a>
 		</nav>
 		<article></article>
 	</main>

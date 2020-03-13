@@ -15,4 +15,9 @@ class MapField extends Model
 		'map_field_type_id'
 	];
 	public $timestamps = false;
+
+	public function users() 
+	{
+		return $this->belongsToMany(User::class, 'user_map_fields');
+	}
 }

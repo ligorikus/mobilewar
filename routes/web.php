@@ -17,8 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth', 'village']], function () {
+	Route::get('/', 'HomeController@index')->name('home');
+	Route::get('/farms', 'FarmController@index')->name('farms.index');
+	Route::get('/map', 'MapController@index')->name('maps.index');
+});
 
-Route::get('/farms', 'FarmController@index')->name('farms.index');
-
-Route::get('/map', 'MapController@index')->name('maps.index');
+Route::group(['middleware' => ['auth', 'no_village']], function () {
+	Route::get('/village/create', 'VillageController@create_first')->name('village.create.first');
+});

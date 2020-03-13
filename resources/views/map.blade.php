@@ -12,6 +12,8 @@
 					<img src="/images/wood.gif" alt="wood" />
 				@elseif ($col === 3)
 					<img src="/images/iron.gif" alt="iron" />
+				@elseif ($col === 'new_village')
+					<img src="/images/new_village.gif" alt="corn" />
 				@else
 					<img src="/images/corn.gif" alt="corn" />
 				@endif
