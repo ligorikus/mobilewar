@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class MapField extends Model
 {
-    use Cachable;
-
 	protected $fillable = [
 		'x_coord',
 		'y_coord',
@@ -18,6 +16,6 @@ class MapField extends Model
 
 	public function users() 
 	{
-		return $this->belongsToMany(User::class, 'user_map_fields');
+		return $this->belongsToMany(User::class, 'user_map_fields')->withTimestamps();
 	}
 }

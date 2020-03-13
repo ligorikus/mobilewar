@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function map_fields()
     {
-        return $this->belongsToMany(MapField::class, 'user_map_fields');
+        return $this->belongsToMany(MapField::class, 'user_map_fields')->withTimestamps();
     }
 }
