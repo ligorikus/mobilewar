@@ -17,6 +17,9 @@ class CreateFarmLevelsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('farm_id')->index();
             $table->unsignedInteger('level')->default(0);
+            $table->unsignedInteger('population')->default(0);
+            $table->unsignedInteger('culture')->default(0);
+            $table->unsignedInteger('production')->default(0);
 
             $table->foreign('farm_id')
                 ->references('id')

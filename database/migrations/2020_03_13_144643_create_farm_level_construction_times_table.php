@@ -16,7 +16,6 @@ class CreateFarmLevelConstructionTimesTable extends Migration
         Schema::create('farm_level_construction_times', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('farm_level_id')->index();
-            $table->integer('main_build_level');
             $table->unsignedInteger('time');
 
             $table->foreign('farm_level_id')

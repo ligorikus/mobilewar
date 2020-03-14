@@ -5,6 +5,15 @@ namespace App\Model;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class MapField
+ * @package App\Model
+ *
+ * @method static create(array $attributes = [])
+ * @method save(array $options = [])
+ * @property integer $map_field_type_id
+ *
+ */
 class MapField extends Model
 {
 	protected $fillable = [

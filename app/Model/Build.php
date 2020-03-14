@@ -4,6 +4,12 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Build
+ * @package App\Model
+ *
+ * @method static create(array $attributes = [])
+ */
 class Build extends Model
 {
     public $timestamps = false;

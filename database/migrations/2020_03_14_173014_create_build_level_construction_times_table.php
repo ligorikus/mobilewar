@@ -16,7 +16,6 @@ class CreateBuildLevelConstructionTimesTable extends Migration
         Schema::create('build_level_construction_times', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('build_level_id')->index();
-            $table->integer('main_build_level');
             $table->unsignedInteger('time');
 
             $table->foreign('build_level_id')

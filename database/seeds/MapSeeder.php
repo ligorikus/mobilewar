@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
 use App\Model\MapField;
 use App\Model\MapFieldType;
 
@@ -20,6 +19,7 @@ class MapSeeder extends Seeder
 
        	for ($i = 0; $i < $size; $i++) {
        		for ($j = 0; $j < $size; $j++) {
+       		    /** @var MapField $map_field */
        			$map_field = MapField::create(['x_coord' => $i, 'y_coord' => $j]);
        			$generator = rand(0, 100);
        			if ($generator <= 50) {
