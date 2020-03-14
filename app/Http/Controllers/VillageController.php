@@ -12,7 +12,8 @@ class VillageController extends Controller
     {
     	$map_field_type_default = MapFieldType::where('name', 'default')->first();
     	$map_field = MapField::where('map_field_type_id', $map_field_type_default->id)->doesnthave('users')->get()->random();
-    	\auth()->user()->map_fields()->attach($map_field);
+    	/** @var MapField $user_map_field */
+    	$user_map_field = \auth()->user()->map_fields()->attach($map_field);
     	return redirect()->route('home');
     }
 }

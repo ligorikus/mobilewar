@@ -16,12 +16,12 @@ class CreateMapFieldBuildsTable extends Migration
         Schema::create('map_field_builds', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('map_field_id')->index();
-            $table->unsignedInteger('build_id')->index();
+            $table->unsignedInteger('build_level_id')->index();
             $table->timestamps();
 
-            $table->foreign('build_id')
+            $table->foreign('build_level_id')
                 ->references('id')
-                ->on('builds')
+                ->on('build_levels')
                 ->onDelete('cascade');
 
             $table->foreign('map_field_id')
