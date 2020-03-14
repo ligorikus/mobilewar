@@ -21,11 +21,11 @@ class MapController extends Controller
     	if ($request->y !== null) {
     		$y_coord = $request->y;
     	}
-    	$start_x = $x_coord - floor($size / 2) >= 0 ? $x_coord - floor($size / 2) : 0;
-    	$end_x = $x_coord + floor($size / 2) <= $max_n ? $x_coord + floor($size / 2) : $max_n;
+    	$start_x = (int)($x_coord - floor($size / 2) >= 0 ? $x_coord - floor($size / 2) : 0);
+    	$end_x = (int)($x_coord + floor($size / 2) < $max_n ? $x_coord + floor($size / 2) : $max_n-1);
 
-    	$start_y = $y_coord - floor($size / 2) >= 0 ? $y_coord - floor($size / 2) : 0;
-    	$end_y = $y_coord + floor($size / 2) <= $max_n ? $y_coord + floor($size / 2) : $max_n;
+    	$start_y = (int)($y_coord - floor($size / 2) >= 0 ? $y_coord - floor($size / 2) : 0);
+    	$end_y = (int)($y_coord + floor($size / 2) < $max_n ? $y_coord + floor($size / 2) : $max_n-1);
 
     	$map_fields = MapField::with('users')
     		->where('x_coord', '>=', $start_x)
@@ -33,7 +33,7 @@ class MapController extends Controller
     		->where('y_coord', '>=', $start_y)
     		->where('y_coord', '<=', $end_y)
     		->get();
-    	
+
     	$map_field_types = MapFieldType::all();
     	$map = [];
     	for ($i = $start_x; $i <= $end_x; $i++) {

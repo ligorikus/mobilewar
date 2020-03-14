@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFarmsTable extends Migration
+class CreateFarmLevelConstructionResourcesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class CreateFarmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('farms', function (Blueprint $table) {
+        Schema::create('farm_level_construction_resources', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->unsignedInteger('farm_level_id')->index();
             $table->unsignedInteger('game_resource_id')->index();
-            $table->unsignedInteger('image_id')->nullable();
+            $table->integer('value');
+
+            $table->foreign('farm_level_id')
+                ->references('id')
+                ->on('farm_levels')
+                ->onDelete('cascade');
 
             $table->foreign('game_resource_id')
                 ->references('id')
                 ->on('game_resources')
                 ->onDelete('cascade');
-
-            $table->foreign('image_id')
-                ->references('id')
-                ->on('images')
-                ->onDelete('set null');
         });
     }
 
@@ -38,6 +38,6 @@ class CreateFarmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('farms');
+        Schema::dropIfExists('farm_level_construction_resources');
     }
 }

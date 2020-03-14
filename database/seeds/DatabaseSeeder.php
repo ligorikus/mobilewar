@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GameResourceSeeder::class);
         $this->call(MapFieldTypeSeeder::class);
         $this->call(MapSeeder::class);
+        $this->call(FarmSeeder::class);
     }
 }
