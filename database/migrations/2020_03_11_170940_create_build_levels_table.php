@@ -18,6 +18,7 @@ class CreateBuildLevelsTable extends Migration
             $table->unsignedInteger('build_id')->index();
             $table->unsignedInteger('level')->default(0);
             $table->unsignedInteger('population')->default(0);
+            $table->unsignedInteger('culture')->default(0);
 
             $table->foreign('build_id')
                 ->references('id')

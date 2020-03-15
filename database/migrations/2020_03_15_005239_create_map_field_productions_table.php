@@ -39,6 +39,6 @@ class CreateMapFieldProductionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_productions');
+        Schema::dropIfExists('map_field_productions');
     }
 }

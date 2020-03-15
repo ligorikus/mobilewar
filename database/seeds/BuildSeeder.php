@@ -369,24 +369,29 @@ class BuildSeeder extends Seeder
             /** @var Build $building */
             $building = Build::create(['title' => $key]);
 
-            for ($level = 1; $level <= $build['levels']; $level++) {
+            for ($level = 0; $level <= $build['levels']; $level++) {
                 /** @var BuildLevel $build_level */
-                $build_level = $building->levels()->create(['level' => $level, 'population' => $build['population'][$level-1]]);
-                foreach ($build['resources'] as $resource => $build_resource) {
-                    $build_level->resources()->create([
-                        'game_resource_id' => $resource,
-                        'value' => $build_resource[$level-1]
+                $build_level = $building->levels()->create([
+                    'level' => $level,
+                    'population' => $level > 0 ? $build['population'][$level-1] : 0,
+                    'culture' => $level > 0 ? $build['culture'][$level-1] : 0
+                ]);
+                if ($level > 0) {
+                    foreach ($build['resources'] as $resource => $build_resource) {
+                        $build_level->resources()->create([
+                            'game_resource_id' => $resource,
+                            'value' => $build_resource[$level-1]
+                        ]);
+                    }
+
+                    $timestamp = Carbon::createFromTimestamp(0);
+                    $time = array_map(function ($a) {return (int)$a;},explode(':', $build['times'][$level-1]));
+                    $timestamp = $timestamp->addHours($time[0])->addMinutes($time[1])->addSeconds($time[2])->timestamp;
+
+                    $build_level->times()->create([
+                        'time' => $timestamp
                     ]);
                 }
-
-                $timestamp = Carbon::createFromTimestamp(0);
-                $time = array_map(function ($a) {return (int)$a;},explode(':', $build['times'][$level-1]));
-                $timestamp = $timestamp->addHours($time[0])->addMinutes($time[1])->addSeconds($time[2])->timestamp;
-
-                $build_level->times()->create([
-                    'time' => $timestamp
-                ]);
-
             }
         }
     }

@@ -39,6 +39,6 @@ class CreateMapFieldResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_resources');
+        Schema::dropIfExists('map_field_resources');
     }
 }
