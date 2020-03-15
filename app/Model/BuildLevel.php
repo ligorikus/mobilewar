@@ -17,4 +17,9 @@ class BuildLevel extends Model
     {
         return $this->hasMany(BuildLevelConstructionTime::class);
     }
+
+    public function options()
+    {
+        return $this->hasMany(BuildLevelOption::class);
+    }
 }

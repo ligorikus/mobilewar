@@ -19,6 +19,7 @@ class CreateBuildConstructionConditionsTable extends Migration
             $table->unsignedInteger('build_condition_id');
             $table->unsignedInteger('build_condition_type');
             $table->unsignedInteger('level');
+            $table->boolean('not_build')->default(false);
 
             $table->foreign('build_id')
                 ->references('id')

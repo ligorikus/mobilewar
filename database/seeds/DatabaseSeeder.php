@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MapSeeder::class);
         $this->call(FarmSeeder::class);
         $this->call(BuildSeeder::class);
+        $this->call(BuildOptionSeeder::class);
     }
 }
