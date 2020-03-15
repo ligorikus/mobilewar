@@ -22,4 +22,9 @@ class GameResource extends Model
     {
     	return $this->hasMany(Farm::class);
     }
+
+    public function user_resources()
+    {
+        return $this->hasMany(UserResource::class);
+    }
 }

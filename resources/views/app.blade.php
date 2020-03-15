@@ -12,7 +12,9 @@
 			<a href="">Фермы</a>
 			<a href="{{route('maps.index')}}">Карта</a>
 		</nav>
-		<article></article>
+		<article>
+			<div></div>
+		</article>
 	</main>
 </body>
 </html>
