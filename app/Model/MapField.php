@@ -40,4 +40,24 @@ class MapField extends Model
     {
         return $this->hasMany(MapFieldFarm::class);
     }
+
+    public function map_field_type()
+    {
+        return $this->belongsTo(MapFieldType::class);
+    }
+
+    public function resources()
+    {
+        return $this->hasMany(MapFieldResource::class);
+    }
+
+    public function productions()
+    {
+        return $this->hasMany(MapFieldProduction::class);
+    }
+
+    public function population()
+    {
+        return $this->hasOne(MapFieldPopulation::class);
+    }
 }

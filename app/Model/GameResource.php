@@ -25,6 +25,6 @@ class GameResource extends Model
 
     public function user_resources()
     {
-        return $this->hasMany(UserResource::class);
+        return $this->hasMany(MapFieldResource::class);
     }
 }

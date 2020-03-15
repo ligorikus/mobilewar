@@ -13,7 +13,13 @@
 			<a href="{{route('maps.index')}}">Карта</a>
 		</nav>
 		<article>
-			<div></div>
+			@foreach($resources as $resource)
+				<div>
+					{{trans('resources.'.$resource->game_resource->title)}}: {{$resource->value}}
+					+
+					{{$map_field->productions->where('game_resource_id', $resource->game_resource_id)->first()->production}}
+				</div>
+			@endforeach
 		</article>
 	</main>
 </body>

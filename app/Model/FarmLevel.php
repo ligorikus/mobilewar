@@ -14,10 +14,14 @@ class FarmLevel extends Model
 {
 	public $timestamps = false;
 
-	public function production()
-	{
-		return $this->hasOne(FarmLevelProduction::class);
-	}
+	protected $with = [
+	    'farm'
+    ];
+
+	public function farm()
+    {
+        return $this->belongsTo(Farm::class);
+    }
 
 	public function resources()
 	{
@@ -28,4 +32,9 @@ class FarmLevel extends Model
 	{
 		return $this->hasMany(FarmLevelConstructionTime::class);
 	}
+
+	public function map_field()
+    {
+        return $this->hasMany(MapFieldFarm::class);
+    }
 }

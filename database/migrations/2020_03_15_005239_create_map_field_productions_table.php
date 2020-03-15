@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserResourcesTable extends Migration
+class CreateMapFieldProductionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateUserResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_resources', function (Blueprint $table) {
+        Schema::create('map_field_productions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('map_field_id')->index();
             $table->unsignedInteger('game_resource_id')->index();
-            $table->integer('value');
+            $table->integer('production');
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('map_field_id')
                 ->references('id')
-                ->on('users')
+                ->on('map_fields')
                 ->onDelete('cascade');
 
             $table->foreign('game_resource_id')
@@ -39,6 +39,6 @@ class CreateUserResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_resources');
+        Schema::dropIfExists('user_productions');
     }
 }
