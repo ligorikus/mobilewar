@@ -15,12 +15,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $resources = GameResource::all();
-        /** @var MapField $map_field */
-        $map_field = auth()->user()->map_fields()->with(['productions', 'resources'])->first();
-        return view('index', [
-            'resources' => $resources,
-            'map_field' => $map_field,
-        ]);
+        return view('index');
     }
 }

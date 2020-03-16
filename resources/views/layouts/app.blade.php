@@ -72,16 +72,20 @@
         </nav>
         <nav>
             <div>
-                <a href="{{route('farms.index')}}">Фермы</a>
+                <a href="{{route('home')}}">{{trans('navigation.main')}}</a>
             </div>
             <div>
-                <a href="">Город</a>
+                <a href="{{route('farms.index')}}">{{trans('navigation.farms')}}</a>
             </div>
             <div>
-                <a href="{{route('maps.index')}}">Карта</a>
+                <a href="">{{trans('navigation.city')}}</a>
+            </div>
+            <div>
+                <a href="{{route('maps.index')}}">{{trans('navigation.map')}}</a>
             </div>
         </nav>
         <hr>
+        @include('resources')
         @yield('content')
     </main>
 
