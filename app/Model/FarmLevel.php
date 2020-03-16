@@ -28,9 +28,9 @@ class FarmLevel extends Model
 		return $this->hasMany(FarmLevelConstructionResource::class);
 	}
 
-	public function times()
+	public function time()
 	{
-		return $this->hasMany(FarmLevelConstructionTime::class);
+		return $this->hasOne(FarmLevelConstructionTime::class);
 	}
 
 	public function map_field()

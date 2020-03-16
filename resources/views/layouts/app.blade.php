@@ -79,7 +79,7 @@
                 <a href="{{route('farms.index')}}">{{trans('navigation.farms')}}</a>
             </div>
             <div>
-                <a href="">{{trans('navigation.city')}}</a>
+                <a href="{{route('city.index')}}">{{trans('navigation.city')}}</a>
             </div>
             <div>
                 <a href="{{route('maps.index')}}">{{trans('navigation.map')}}</a>

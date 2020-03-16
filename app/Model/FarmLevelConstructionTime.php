@@ -13,4 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 class FarmLevelConstructionTime extends Model
 {
 	public $timestamps = false;
+
+	public function farm_level()
+    {
+        return $this->belongsTo(FarmLevel::class);
+    }
 }
