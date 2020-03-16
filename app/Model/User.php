@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'gender', 'nation_id'
     ];
 
     /**
@@ -32,4 +32,8 @@ class User extends Authenticatable
         return $this->belongsToMany(MapField::class, 'user_map_fields')->withTimestamps();
     }
 
+    public function nation ()
+    {
+        return $this->belongsTo(Nation::class);
+    }
 }

@@ -21,14 +21,61 @@ class VillageController extends Controller
 
     	$population = 0;
 
-    	$main_building = Build::with(['levels' => function ($query) {
-    	    $query->where('level', 1);
-        }])->where('title','main_building')->first();
-    	$main_building_level = $main_building->levels->first();
+    	$builds = Build::with('levels')->get();
+
+    	$main_building = $builds->where('title','main_building')->first();
+    	$main_building_level = $main_building->levels->where('level', 1)->first();
         $map_field->builds()->create([
-            'build_level_id' => $main_building_level->id
+            'build_level_id' => $main_building_level->id,
+            'permanent' => true
         ]);
         $population += $main_building_level->population;
+
+        $barn = $builds->where('title','barn')->first();
+        $barn_building_level = $barn->levels->where('level', 0)->first();
+        $map_field->builds()->create([
+            'build_level_id' => $barn_building_level->id,
+            'permanent' => true
+        ]);
+        $population += $barn_building_level->population;
+
+        $warehouse = $builds->where('title','warehouse')->first();
+        $warehouse_building_level = $warehouse->levels->where('level', 0)->first();
+        $map_field->builds()->create([
+            'build_level_id' => $warehouse_building_level->id,
+            'permanent' => true
+        ]);
+        $population += $warehouse_building_level->population;
+
+        $collection_point = $builds->where('title','collection_point')->first();
+        $collection_point_level = $collection_point->levels->where('level', 0)->first();
+        $map_field->builds()->create([
+            'build_level_id' => $collection_point_level->id,
+            'permanent' => true
+        ]);
+        $population += $collection_point_level->population;
+
+        $wall_build = null;
+        switch (auth()->user()->nation->name) {
+            case 'russian':
+                $wall_build = $builds->where('title','city_wall')->first();
+                break;
+            case 'ukraine':
+                $wall_build = $builds->where('title','earthworks')->first();
+                break;
+            case 'poland':
+                $wall_build = $builds->where('title','hedge')->first();
+                break;
+        }
+        if ($wall_build !== null) {
+            $wall_build_level = $wall_build->levels->where('level', 0)->first();
+            $map_field->builds()->create([
+                'build_level_id' => $wall_build_level->id,
+                'permanent' => true
+            ]);
+            $population += $wall_build_level->population;
+        }
+
 
     	$farms = Farm::with(['levels' => function ($query) {
             $query->where('level', 0);

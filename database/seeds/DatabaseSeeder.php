@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(NationSeeder::class);
         $this->call(GameResourceSeeder::class);
         $this->call(MapFieldTypeSeeder::class);
         $this->call(MapSeeder::class);

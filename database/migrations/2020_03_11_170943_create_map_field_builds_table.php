@@ -17,6 +17,7 @@ class CreateMapFieldBuildsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('map_field_id')->index();
             $table->unsignedInteger('build_level_id')->index();
+            $table->boolean('permanent')->default(false);
             $table->timestamps();
 
             $table->foreign('build_level_id')

@@ -1,7 +1,7 @@
 <?php
 
 use App\Model\Build;
-use App\Model\BuildLevel;
+
 use App\Model\BuildLevelOptionType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -79,7 +79,7 @@ class BuildOptionSeeder extends Seeder
             'chamber_of_commerce' => [
                 'capacity' => [0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0]
             ],
-            'city wall' => [
+            'city_wall' => [
                 'defence_factor' => [1.00, 1.03, 1.061, 1.093, 1.126, 1.159, 1.194, 1.23, 1.267, 1.305, 1.344, 1.384, 1.426, 1.469, 1.513, 1.558, 1.605, 1.653, 1.702, 1.754, 1.806],
                 'defence_value' => [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200],
                 'need_rams' => [0, 1, 2, 2, 3, 4, 6, 8, 10, 12, 14, 17, 20, 23, 27, 31, 35, 39, 43, 48, 53]
@@ -104,7 +104,7 @@ class BuildOptionSeeder extends Seeder
                     $option_type = BuildLevelOptionType::create(['type' => $key]);
                     $options->push($key);
                 } else {
-                    $option_type = BuildLevelOptionType::where('type', $key)->first();
+                    $option_type = (new App\Model\BuildLevelOptionType)->where('type', $key)->first();
                 }
                 for ($level = 0; $level < count($build_option); $level++) {
                     $build->levels->where('level', $level)->first()->options()->create([
