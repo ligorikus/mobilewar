@@ -18,7 +18,7 @@ class HomeController extends Controller
         $resources = GameResource::all();
         /** @var MapField $map_field */
         $map_field = auth()->user()->map_fields()->with(['productions', 'resources'])->first();
-        return view('app', [
+        return view('index', [
             'resources' => $resources,
             'map_field' => $map_field,
         ]);

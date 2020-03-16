@@ -20,6 +20,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'village', 'recounting_resources']], function () {
 	Route::get('/', 'HomeController@index')->name('home');
 	Route::get('/farms', 'FarmController@index')->name('farms.index');
+    Route::get('/farms/{farm}', 'FarmController@view')->name('farms.view');
 	Route::get('/map', 'MapController@index')->name('maps.index');
 });
 

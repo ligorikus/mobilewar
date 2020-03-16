@@ -14,7 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <main id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -70,9 +70,20 @@
                 </div>
             </div>
         </nav>
-
+        <nav>
+            <div>
+                <a href="{{route('farms.index')}}">Фермы</a>
+            </div>
+            <div>
+                <a href="">Город</a>
+            </div>
+            <div>
+                <a href="{{route('maps.index')}}">Карта</a>
+            </div>
+        </nav>
+        <hr>
         @yield('content')
-    </div>
+    </main>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
