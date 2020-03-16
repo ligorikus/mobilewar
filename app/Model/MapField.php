@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static where($column, $operator = null, $value = null, $boolean = 'and')
  * @method doesntHave($relation, $boolean = 'and', Closure $callback = null)
  * @property integer $map_field_type_id
+ * @property MapFieldProduction $productions
  *
  */
 class MapField extends Model

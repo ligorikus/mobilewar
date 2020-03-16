@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\GameResource;
 use App\Model\MapField;
 use App\Model\MapFieldResource;
 use Illuminate\Http\Request;
@@ -14,9 +15,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $resources = MapFieldResource::with('game_resource')->get();
+        $resources = GameResource::all();
         /** @var MapField $map_field */
-        $map_field = auth()->user()->map_fields()->with(['productions'])->first();
-        return view('app', ['resources' => $resources, 'map_field' => $map_field]);
+        $map_field = auth()->user()->map_fields()->with(['productions', 'resources'])->first();
+        return view('app', [
+            'resources' => $resources,
+            'map_field' => $map_field,
+        ]);
     }
 }

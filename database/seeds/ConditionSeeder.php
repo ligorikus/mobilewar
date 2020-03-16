@@ -11,6 +11,6 @@ class ConditionSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }
