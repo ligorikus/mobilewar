@@ -388,7 +388,7 @@ class BuildSeeder extends Seeder
                     $time = array_map(function ($a) {return (int)$a;},explode(':', $build['times'][$level-1]));
                     $timestamp = $timestamp->addHours($time[0])->addMinutes($time[1])->addSeconds($time[2])->timestamp;
 
-                    $build_level->times()->create([
+                    $build_level->time()->create([
                         'time' => $timestamp
                     ]);
                 }

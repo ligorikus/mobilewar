@@ -96,7 +96,7 @@ class FarmSeeder extends Seeder
                     $time = array_map(function ($a) {return (int)$a;},explode(':', $construction['times'][$resource->id][$level-1]));
                     $timestamp = $timestamp->addHours($time[0])->addMinutes($time[1])->addSeconds($time[2])->timestamp;
 
-                    $farm_level->times()->create([
+                    $farm_level->time()->create([
                         'time' => $timestamp
                     ]);
                 }
