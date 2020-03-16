@@ -104,7 +104,7 @@ class BuildOptionSeeder extends Seeder
                     $option_type = BuildLevelOptionType::create(['type' => $key]);
                     $options->push($key);
                 } else {
-                    $option_type = (new App\Model\BuildLevelOptionType)->where('type', $key)->first();
+                    $option_type = BuildLevelOptionType::where('type', $key)->first();
                 }
                 for ($level = 0; $level < count($build_option); $level++) {
                     $build->levels->where('level', $level)->first()->options()->create([
