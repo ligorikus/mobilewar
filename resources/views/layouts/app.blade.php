@@ -70,6 +70,7 @@
                 </div>
             </div>
         </nav>
+        @auth
         <nav>
             <div>
                 <a href="{{route('home')}}">{{trans('navigation.main')}}</a>
@@ -85,7 +86,9 @@
             </div>
         </nav>
         <hr>
+
         @include('resources')
+        @endauth
         @yield('content')
     </main>
 
