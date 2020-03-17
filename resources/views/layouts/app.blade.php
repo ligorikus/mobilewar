@@ -14,84 +14,63 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+@auth
     <main id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+        <div class="container">
+            <header>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                <div class="header__data">
+                    @include('header.timer')
+                    @include('header.collection_point')
                 </div>
+                <div>
+                    @include('header.user')
+                </div>
+            </header>
+            <div class="line"></div>
+            @include('navigation')
+            <div class="line"></div>
+            @include('resources')
+            @include('builders')
+            @yield('content')
+        </div>
+    </main>
+@endauth
+@guest
+    <main id="app">
+        <div class="container noauth" >
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                        <!-- Collapsed Hamburger -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
+                        <!-- Branding Image -->
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            {{ config('app.name', 'Laravel') }}
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <!-- Authentication Links -->
                             <li><a href="{{ route('login') }}">{{trans('auth.sign_in')}}</a></li>
                             <li><a href="{{ route('register') }}">{{trans('auth.sign_up')}}</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        @auth
-        <nav>
-            <div>
-                <a href="{{route('home')}}">{{trans('navigation.main')}}</a>
-            </div>
-            <div>
-                <a href="{{route('farms.index')}}">{{trans('navigation.farms')}}</a>
-            </div>
-            <div>
-                <a href="{{route('city.index')}}">{{trans('navigation.city')}}</a>
-            </div>
-            <div>
-                <a href="{{route('maps.index')}}">{{trans('navigation.map')}}</a>
-            </div>
-        </nav>
-        <hr>
-
-        @include('resources')
-        @endauth
-        @yield('content')
+            </nav>
+            @yield('content')
+        </div>
     </main>
 
+@endguest
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

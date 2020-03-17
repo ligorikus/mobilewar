@@ -21,6 +21,7 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'login' => 'Логин',
+    'logout' => 'Выход',
     'password' => 'Пароль',
     'gender' => 'Пол',
     'gender_type' => [

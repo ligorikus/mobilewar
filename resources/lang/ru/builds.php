@@ -6,6 +6,7 @@ return [
     'build_cost' => 'Стоимость постройки',
     'build_level' => 'Построить уровень',
     'build_time' => 'Время строительства',
+    'build_action' => 'Построить',
 
     'main_building' => 'Главное здание',
     'sawmill' => 'Лесопилка',

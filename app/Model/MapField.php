@@ -5,6 +5,7 @@ namespace App\Model;
 use Closure;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class MapField
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static where($column, $operator = null, $value = null, $boolean = 'and')
  * @method doesntHave($relation, $boolean = 'and', Closure $callback = null)
  * @property integer $map_field_type_id
- * @property MapFieldProduction $productions
+ * @property Collection(MapFieldProduction) $productions
  *
  */
 class MapField extends Model
@@ -60,5 +61,10 @@ class MapField extends Model
     public function population()
     {
         return $this->hasOne(MapFieldPopulation::class);
+    }
+
+    public function build_processes()
+    {
+        return $this->hasMany(BuildProcess::class);
     }
 }

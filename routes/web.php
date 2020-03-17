@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth', 'village', 'recounting_resources']], func
     Route::get('/city', 'CityController@index')->name('city.index');
     Route::get('/city/{build}', 'CityController@view')->name('city.view');
 
+    Route::post('/build_farm/{farm}', 'BuildController@build_farm')->name('build.build_farm');
+    Route::post('/build_construction/{build}', 'BuildController@build_construction')->name('build.build_construction');
+
 	Route::get('/map', 'MapController@index')->name('maps.index');
 });
 

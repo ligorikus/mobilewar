@@ -7,8 +7,58 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-.map {
+$bgColor: #4a2805;
 
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: $bgColor;
+}
+
+main {
+	color: #ffffff;
+	padding: 10px;
+}
+
+div.noauth {
+	color: #000;
+}
+
+a {
+	color: #ffffff;
+	margin: 7px
+}
+
+.header__data {
+	font-size: 14px;
+	display: flex;
+}
+.header__user {
+	display:flex;
+}
+
+.head__collection_point {
+	display: flex;
+	align-self: center;
+	margin:7px;
+}
+
+.head_collection_point-point {
+	min-width: 5px;
+	min-height: 5px;
+	background: #888888;
+	margin-right: 3px;
+}
+
+.line {
+	width: 100%;
+	height: 7px;
+	background-image: url("/images/line.jpg");
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .map__row {
@@ -17,5 +67,27 @@
 
 .map__col {
 	width: 25px;
-	heigth: 25px;
+	height: 25px;
+}
+
+.panel {
+	background-color: #985410;
+	border: 2px ridge #985410;
+	font-size: 14px;
+	margin: 5px;
+}
+
+.item_panel {
+	margin: 5px;
+}
+
+.panel .item_panel span {
+	color: #fae596;
+	font-weight: bold;
+	font-size: 16px;
+}
+.item {
+	margin-top: 5px;
+	padding: 4px;
+	border-top: 1px solid #4a2805;
 }
