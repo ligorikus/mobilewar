@@ -8347,10 +8347,6 @@ main {
   padding: 10px;
 }
 
-div.noauth {
-  color: #000;
-}
-
 a {
   color: #ffffff;
   margin: 7px;
@@ -8405,8 +8401,8 @@ a {
 }
 
 .panel {
-  background-color: #985410;
-  border: 2px ridge #985410;
+  background-color: #966534;
+  border: 2px ridge #966534;
   font-size: 14px;
   margin: 5px;
 }

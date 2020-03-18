@@ -38,7 +38,7 @@
 @endauth
 @guest
     <main id="app">
-        <div class="container noauth" >
+        <div class="container" >
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
