@@ -87,3 +87,15 @@ a {
 	padding: 4px;
 	border-top: 1px solid #4a2805;
 }
+
+.build_wrapper {
+	width: 150px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.build_wrapper a {
+	margin: 0;
+}
+.build_wrapper img {
+	width: 50px;
+}

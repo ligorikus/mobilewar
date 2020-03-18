@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach($map_field->farms as $farm)
-        <div>
-            <a href="{{route('farms.view', $farm)}}">
-                {{trans('farms.'.$farm->farm_level->farm->title)}}.
-                {{trans('builds.level')}} {{$farm->farm_level->level}}
-            </a>
-
-        </div>
-    @endforeach
+    <div class="build_wrapper">
+        @foreach($map_field->farms as $farm)
+            <div>
+                <a href="{{route('farms.view', $farm)}}">
+                    <img src="{{asset('images/'.$farm->farm_level->farm->title.'.gif')}}" alt="">
+                </a>
+            </div>
+        @endforeach
+    </div>
 @endsection

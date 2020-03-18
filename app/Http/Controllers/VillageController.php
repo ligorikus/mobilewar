@@ -27,7 +27,8 @@ class VillageController extends Controller
     	$main_building_level = $main_building->levels->where('level', 1)->first();
         $map_field->builds()->create([
             'build_level_id' => $main_building_level->id,
-            'permanent' => true
+            'permanent' => true,
+            'index' => 7
         ]);
         $population += $main_building_level->population;
 
@@ -35,7 +36,8 @@ class VillageController extends Controller
         $barn_building_level = $barn->levels->where('level', 0)->first();
         $map_field->builds()->create([
             'build_level_id' => $barn_building_level->id,
-            'permanent' => true
+            'permanent' => true,
+            'index' => 9
         ]);
         $population += $barn_building_level->population;
 
@@ -43,7 +45,8 @@ class VillageController extends Controller
         $warehouse_building_level = $warehouse->levels->where('level', 0)->first();
         $map_field->builds()->create([
             'build_level_id' => $warehouse_building_level->id,
-            'permanent' => true
+            'permanent' => true,
+            'index' => 1
         ]);
         $population += $warehouse_building_level->population;
 
@@ -51,7 +54,8 @@ class VillageController extends Controller
         $collection_point_level = $collection_point->levels->where('level', 0)->first();
         $map_field->builds()->create([
             'build_level_id' => $collection_point_level->id,
-            'permanent' => true
+            'permanent' => true,
+            'index' => 8
         ]);
         $population += $collection_point_level->population;
 
@@ -71,7 +75,8 @@ class VillageController extends Controller
             $wall_build_level = $wall_build->levels->where('level', 0)->first();
             $map_field->builds()->create([
                 'build_level_id' => $wall_build_level->id,
-                'permanent' => true
+                'permanent' => true,
+                'index' => 2
             ]);
             $population += $wall_build_level->population;
         }
@@ -81,15 +86,34 @@ class VillageController extends Controller
             $query->where('level', 0);
         }])->get();
 
+        $game_resources = GameResource::all();
+
+        /** @var GameResource $corn */
+        $corn = $game_resources->where('title', 'corn')->first();
+        /** @var GameResource $wood */
+        $wood = $game_resources->where('title', 'wood')->first();
+        /** @var GameResource $iron */
+        $iron = $game_resources->where('title', 'iron')->first();
+        /** @var GameResource $clay */
+        $clay  = $game_resources->where('title', 'clay')->first();
+
+        $farm_indexes = [
+            $corn->id => [2, 3, 11, 12, 13, 14],
+            $wood->id => [4, 5, 10, 15],
+            $iron->id => [0, 1, 6, 17],
+            $clay->id => [7, 8, 9, 16]
+        ];
     	foreach ($farms as $farm) {
             $count_of_resource = $map_field->map_field_type->resources->where('game_resource_id', $farm->game_resource_id)->first()->count;
             $production = 0;
             for ($i = 0; $i < $count_of_resource; $i++) {
+                $index = $farm_indexes[$farm->game_resource_id][$i];
                 $farm_level = $farm->levels->first();
                 $production += $farm_level->production;
                 $population += $farm_level->population;
                 $map_field->farms()->create([
-                    'farm_level_id' => $farm_level->id
+                    'farm_level_id' => $farm_level->id,
+                    'index' => $index
                 ]);
             }
             $map_field->productions()->create(['production' => $production, 'game_resource_id' => $farm->game_resource_id]);

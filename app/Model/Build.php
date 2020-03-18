@@ -18,4 +18,9 @@ class Build extends Model
     {
         return $this->hasMany(BuildLevel::class);
     }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

@@ -1,13 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach($map_field->builds as $build)
-        <div>
-            <a href="{{route('city.view', $build)}}">
-                {{trans('builds.'.$build->build_level->build->title)}}.
-                {{trans('builds.level')}} {{$build->build_level->level}}
-            </a>
+    <div class="build_wrapper">
+        @for ($index = 0; $index < 21; $index++)
+            @php
+            $build = $map_field->builds->where('index', $index)->first();
+            @endphp
+            <div>
+                @if ($build !== null)
+                <a href="{{route('city.view', $build)}}">
+                    @if ($build->build_level->build->image !== null)
+                        <img src="{{asset('images/'.$build->build_level->build->image->url)}}" alt="">
+                    @endif
+                </a>
+                @else
+                    <img src="{{asset('images/empty_field.gif')}}" alt="">
+                @endif
 
-        </div>
-    @endforeach
+            </div>
+        @endfor
+    </div>
 @endsection

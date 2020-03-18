@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MapFieldFarm extends Model implements MapFieldEntity
 {
     protected $fillable = [
-        'farm_level_id'
+        'farm_level_id', 'index'
     ];
 
     protected $with = [

@@ -35,12 +35,12 @@ class MapField extends Model
 
 	public function builds()
     {
-        return $this->hasMany(MapFieldBuild::class);
+        return $this->hasMany(MapFieldBuild::class)->orderBy('index');
     }
 
     public function farms()
     {
-        return $this->hasMany(MapFieldFarm::class);
+        return $this->hasMany(MapFieldFarm::class)->orderBy('index');
     }
 
     public function map_field_type()
