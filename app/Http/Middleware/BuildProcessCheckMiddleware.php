@@ -73,12 +73,12 @@ class BuildProcessCheckMiddleware
                     $population = $map_field->population;
                     $population->setPopulation($next_level_build->population + $population->population);
                     $population->save();
+                    $build->$build_level_id = $next_level_build->id;
+                    $build->save();
                     if (isset($next_level_build->production)) {
                         $this->resourceService->recount_production($map_field, GameResource::find($build->farm_level->farm->game_resource_id));
                     }
                     $this->resourceService->recount_production($map_field, GameResource::where('title', 'corn')->first());
-                    $build->$build_level_id = $next_level_build->id;
-                    $build->save();
                     $build_process->delete();
                 }
             }

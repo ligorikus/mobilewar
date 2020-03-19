@@ -43,8 +43,9 @@ class BuildController extends Controller
             }
             $build_level = get_class($entity) === MapFieldBuild::class ? $entity->build_level : $entity->farm_level;
             $build_type = get_class($entity) === MapFieldBuild::class ? 'build' : 'farm';
+            $build_id_str = $build_type.'_id';
             $next_level_build = $next_level_build_process = $level_class::with(['time', 'resources'])
-                ->where($build_type.'_id', $entity->id)
+                ->where($build_type.'_id', $build_level->$build_id_str)
                 ->where('level', $build_level->level+1)
                 ->first();
             $resources = $map_field->resources;

@@ -19,6 +19,7 @@ class CityController extends Controller
     public function view(MapFieldBuild $build)
     {
         $build->refresh();
+        $build->load('build_level');
         $game_resources = GameResource::all();
         $map_field = auth()->user()->map_fields()->first();
         $build_processes = $map_field->build_processes;
