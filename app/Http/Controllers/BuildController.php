@@ -70,7 +70,7 @@ class BuildController extends Controller
                 $build_type_process = get_class($build) === MapFieldBuild::class ? 'build' : 'farm';
                 $build_level_process = $build_process->build_type === MapFieldBuild::class ? $build->build_level : $build->farm_level;
                 $next_level_build_process = $level_class::with(['time'])
-                    ->where($build_type_process.'_id', $build_level_process->build_id)
+                    ->where($build_type_process.'_id', $build_level_process->$build_id_str)
                     ->where('level', $build_level_process->level+1)
                     ->first();
 
