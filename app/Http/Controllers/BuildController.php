@@ -66,11 +66,22 @@ class BuildController extends Controller
             $start_time = Carbon::now();
             /** @var BuildProcess $build_process */
             foreach ($map_field->build_processes as $build_process) {
+                switch ($build_process->build_type) {
+                    case MapFieldBuild::class:
+                        $level_class_process = BuildLevel::class;
+                        break;
+                    case MapFieldFarm::class:
+                        $level_class_process = FarmLevel::class;
+                        break;
+                    default:
+                        return redirect()->back();
+                }
                 $build = (new $build_process->build_type)->find($build_process->build_id);
                 $build_type_process = get_class($build) === MapFieldBuild::class ? 'build' : 'farm';
                 $build_level_process = $build_process->build_type === MapFieldBuild::class ? $build->build_level : $build->farm_level;
-                $next_level_build_process = $level_class::with(['time'])
-                    ->where($build_type_process.'_id', $build_level_process->$build_id_str)
+                $build_id_process_str = $build_type_process.'_id';
+                $next_level_build_process = $level_class_process::with(['time'])
+                    ->where($build_id_process_str, $build_level_process->$build_id_process_str)
                     ->where('level', $build_level_process->level+1)
                     ->first();
 
