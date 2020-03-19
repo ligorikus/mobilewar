@@ -1,8 +1,19 @@
 <div class="panel">
     <div class="item_panel">
-        <span>Строительство:</span>
+        <span>{{trans('builds.building')}}:</span>
         <div class="item">
-            Строители свободны
+            @if ($build_process === null)
+                {{trans('builds.builders_are_free')}}
+            @else
+                <div>
+                    {{trans('builds.'.$build_level->$type->title)}}
+                    {{$build_level->level + 1}} {{trans('builds.level_short')}}.
+                </div>
+                <div>
+                    <img src="{{asset('images/time.gif')}}" alt=""> :
+                    {{\Carbon\Carbon::createFromTimestamp($seconds_left)->format('H:i:s')}}
+                </div>
+            @endif
         </div>
     </div>
 </div>

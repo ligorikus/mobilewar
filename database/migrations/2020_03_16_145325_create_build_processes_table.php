@@ -20,6 +20,7 @@ class CreateBuildProcessesTable extends Migration
             $table->string('build_type');
             $table->float('progress');
             $table->boolean('status')->default(false);
+            $table->timestamp('start_time');
             $table->timestamps();
             
             $table->foreign('map_field_id')

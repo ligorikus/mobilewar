@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'village' => \App\Http\Middleware\VillageMiddleware::class,
         'no_village' => \App\Http\Middleware\NoVillageMiddleware::class,
-        'recounting_resources' => \App\Http\Middleware\RecountingResources::class
+        'recounting_resources' => \App\Http\Middleware\RecountingResources::class,
+        'build_process_check' => \App\Http\Middleware\BuildProcessCheckMiddleware::class,
     ];
 }

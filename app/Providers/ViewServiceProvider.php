@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composer\BuilderComposer;
 use App\Http\View\Composer\ResourceComposer;
 use App\Http\View\Composer\UserHeaderComposer;
 use Illuminate\Support\Facades\View;
@@ -18,6 +19,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('resources', ResourceComposer::class);
         View::composer('header.user', UserHeaderComposer::class);
+        View::composer('builders', BuilderComposer::class);
     }
 
     /**

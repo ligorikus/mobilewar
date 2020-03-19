@@ -2,6 +2,9 @@
 
 return [
     'level' => 'Уровень',
+    'level_short' => 'ур',
+    'building' => 'Строительство',
+    'builders_are_free' => 'Строители свободны',
     'upgrade_build' => 'Улучшение здания',
     'build_cost' => 'Стоимость постройки',
     'build_level' => 'Построить уровень',
