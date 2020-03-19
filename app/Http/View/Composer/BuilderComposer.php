@@ -4,8 +4,11 @@
 namespace App\Http\View\Composer;
 use App\Model\BuildLevel;
 use App\Model\BuildProcess;
+use App\Model\FarmLevel;
 use App\Model\MapFieldBuild;
+use App\Model\MapFieldFarm;
 use Illuminate\View\View;
+use \Carbon\Carbon;
 
 class BuilderComposer
 {
@@ -15,11 +18,24 @@ class BuilderComposer
         $view->with('build_process', $build_process);
         if ($build_process !== null) {
             $build = (new $build_process->build_type)->find($build_process->build_id);
-            $seconds_passed = \Carbon\Carbon::createFromTimestamp($build_process->updated_at->timestamp)
-                ->diffInSeconds(\Carbon\Carbon::now());
+            $seconds_passed = Carbon::now()->timestamp - Carbon::parse($build_process->start_time)->timestamp;
+
+            switch ($build_process->build_type) {
+                case MapFieldBuild::class:
+                    $level_class = BuildLevel::class;
+                    break;
+                case MapFieldFarm::class:
+                    $level_class = FarmLevel::class;
+                    break;
+                default:
+                    continue;
+            }
+
             $build_level = $build_process->build_type === MapFieldBuild::class ? $build->build_level : $build->farm_level;
-            $next_level_build = BuildLevel::with(['resources', 'time'])
-                ->where('build_id', $build_level->build_id)
+            $build_type = get_class($build) === MapFieldBuild::class ? 'build' : 'farm';
+            $build_id_str = $build_type.'_id';
+            $next_level_build = $level_class::with(['time'])
+                ->where($build_id_str, $build_level->$build_id_str)
                 ->where('level', $build_level->level+1)
                 ->first();
             $seconds_left = $next_level_build->time->time - $seconds_passed;

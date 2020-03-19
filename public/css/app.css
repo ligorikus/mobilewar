@@ -8437,3 +8437,11 @@ a {
   width: 50px;
 }
 
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+

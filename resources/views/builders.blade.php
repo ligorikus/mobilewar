@@ -6,7 +6,7 @@
                 {{trans('builds.builders_are_free')}}
             @else
                 <div>
-                    {{trans('builds.'.$build_level->$type->title)}}
+                    {{trans($type.'s.'.$build_level->$type->title)}}
                     {{$build_level->level + 1}} {{trans('builds.level_short')}}.
                 </div>
                 <div>

@@ -9,4 +9,9 @@ class MapFieldPopulation extends Model
     protected $fillable = [
         'population'
     ];
+
+    public function setPopulation($population)
+    {
+        $this->population = $population;
+    }
 }

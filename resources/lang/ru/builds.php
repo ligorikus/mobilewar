@@ -10,6 +10,9 @@ return [
     'build_level' => 'Построить уровень',
     'build_time' => 'Время строительства',
     'build_action' => 'Построить',
+    'add_to_queue' => 'Добавить в очередь',
+    'builders_are_busy' => 'Строители заняты',
+    'not_enough_resources' => 'Недостаточно ресурсов',
 
     'main_building' => 'Главное здание',
     'sawmill' => 'Лесопилка',

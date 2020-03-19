@@ -12,4 +12,9 @@ class Farm extends Model
     {
     	return $this->hasMany(FarmLevel::class);
     }
+
+    public function resource()
+    {
+        return $this->belongsTo(GameResource::class);
+    }
 }

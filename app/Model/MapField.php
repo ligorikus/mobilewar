@@ -65,6 +65,6 @@ class MapField extends Model
 
     public function build_processes()
     {
-        return $this->hasMany(BuildProcess::class)->orderBy('updated_at');
+        return $this->hasMany(BuildProcess::class)->orderBy('start_time');
     }
 }
