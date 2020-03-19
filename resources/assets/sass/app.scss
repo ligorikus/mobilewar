@@ -106,3 +106,24 @@ a {
 .bold {
 	font-weight: bold;
 }
+.build__img {
+	position: relative;
+}
+.build__img span {
+	position: absolute;
+	top: 7px;
+	left: 2px;
+	font-size: 1.5em;
+	font-weight: 900;
+	z-index:1;
+}
+
+.build__img span.farm {
+	text-shadow: 1px 1px 2px #820512;
+	color: #850815;
+}
+
+.build__img span.build {
+	text-shadow: 1px 1px 2px #820512;
+	color: #850815;
+}

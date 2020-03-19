@@ -4,8 +4,9 @@
     <div class="build_wrapper">
         @foreach($map_field->farms as $farm)
             <div>
-                <a href="{{route('farms.view', $farm)}}">
+                <a href="{{route('farms.view', $farm)}}" class="build__img">
                     <img src="{{asset('images/'.$farm->farm_level->farm->title.'.gif')}}" alt="">
+                    <span class="farm">{{$farm->farm_level->level}}</span>
                 </a>
             </div>
         @endforeach
