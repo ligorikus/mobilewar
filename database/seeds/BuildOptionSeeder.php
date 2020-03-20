@@ -25,7 +25,7 @@ class BuildOptionSeeder extends Seeder
             'brickworks' => [
                 'production' => [0, 0.05, 0.10, 0.15, 0.20, 0.25]
             ],
-            'iron foundry' => [
+            'iron_foundry' => [
                 'production' => [0, 0.05, 0.10, 0.15, 0.20, 0.25]
             ],
             'flour_mill' => [
@@ -61,7 +61,7 @@ class BuildOptionSeeder extends Seeder
             'arena' => [
                 'move_speed' => [0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0]
             ],
-            'weapons_forge' => [
+            'forge' => [
                 'access' => [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
             ],
             'embassy' => [
