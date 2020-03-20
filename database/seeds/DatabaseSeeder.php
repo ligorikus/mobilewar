@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FarmSeeder::class);
         $this->call(BuildSeeder::class);
         $this->call(BuildOptionSeeder::class);
+        $this->call(ConditionSeeder::class);
     }
 }
