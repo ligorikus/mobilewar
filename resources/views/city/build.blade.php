@@ -46,7 +46,7 @@
                             {{csrf_field()}}
                             <button class="btn btn-default">{{trans('builds.build_action')}}</button>
                         </form>
-                    @elseif ($build_processes->count() < 3)
+                    @elseif ($build_processes->count() < 1)
                         <form action="{{route('build.build_construction', ['build' => $build])}}" method="post">
                             {{csrf_field()}}
                             <button class="btn btn-default">{{trans('builds.add_to_queue')}}</button>

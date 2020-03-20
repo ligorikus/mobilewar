@@ -27,7 +27,7 @@ class BuildController extends Controller
 
     private function build(MapFieldEntity $entity)
     {
-        $max_queue_processes = 3;
+        $max_queue_processes = 1;
         /** @var MapField $map_field */
         $map_field = auth()->user()->map_fields()->first();
         if ($map_field->build_processes->count() < $max_queue_processes) {
