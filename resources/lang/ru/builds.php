@@ -31,7 +31,7 @@ return [
     'workshop' => 'Мастерская',
     'arena' => 'Арена',
     'academy' => 'Академия',
-    'weapons_forge' => 'Кузница оружия',
+    'forge' => 'Кузница',
     'tavern' => 'Таверна',
     'embassy' => 'Посольство',
     'residence' => 'Резиденция',

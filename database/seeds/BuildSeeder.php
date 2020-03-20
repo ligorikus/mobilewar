@@ -64,7 +64,7 @@ class BuildSeeder extends Seeder
                 'population' => [3,2,2,2,2],
                 'culture' => [1,1,2,2,2]
             ],
-            'iron foundry' => [
+            'iron_foundry' => [
                 'levels' => 5,
                 'resources' => [
                     $corn->id => [120,215,390,700,1260],
@@ -235,7 +235,7 @@ class BuildSeeder extends Seeder
                 'population' => [4,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
                 'culture' => [5,6,7,8,10,12,14,17,21,25,30,36,43,51,62,74,89,106,128,153]
             ],
-            'weapons_forge' => [
+            'forge' => [
                 'levels' => 20,
                 'resources' => [
                     $corn->id => [160,205,260,335,430,550,705,900,1155,1475,1890,2420,3095,3960,5070,6490,8310,10635,13610,17420],
