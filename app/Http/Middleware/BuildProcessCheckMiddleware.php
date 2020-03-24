@@ -39,6 +39,7 @@ class BuildProcessCheckMiddleware
         foreach ($map_field = auth()->user()->map_fields as $map_field) {
             $build_processes = $map_field->build_processes;
             foreach ($build_processes->where('status', true) as $build_process) {
+                /** @var MapFieldBuild|MapFieldFarm $build */
                 $build = (new $build_process->build_type)->find($build_process->build_id);
                 $seconds_passed = Carbon::now()->timestamp - Carbon::parse($build_process->start_time)->timestamp;
 
@@ -75,6 +76,7 @@ class BuildProcessCheckMiddleware
                     $population->save();
                     $build->$build_level_id = $next_level_build->id;
                     $build->save();
+                    $build->refresh();
                     if (isset($next_level_build->production)) {
                         $this->resourceService->recount_production($map_field, GameResource::find($build->farm_level->farm->game_resource_id));
                     }

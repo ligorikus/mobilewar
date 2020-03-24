@@ -13,6 +13,7 @@ class ResourceService
 {
     /**
      * @param MapField $mapField
+     * @param Carbon|null $recount_time
      */
     public function recount(MapField $mapField, Carbon $recount_time = null)
     {
@@ -48,14 +49,16 @@ class ResourceService
                     $limiter = $warehouse;
                     break;
             }
+
+            $resource->updated_at = $recount_time;
+
             if ($production_passed > 0) {
                 $predicted_value = $resource->value + $production_passed;
                 $resource->value = $predicted_value > (int)$limiter->value ? (int)$limiter->value : $predicted_value;
-                $resource->save();
             } elseif ($resource->value > (int)$limiter->value) {
                 $resource->value = (int)$limiter->value;
-                $resource->save();
             }
+            $resource->save(['timestamps' => false]);
         }
     }
 
