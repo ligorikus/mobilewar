@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Model\MapField;
 use App\Model\MapFieldType;
 use App\Model\MapFieldTypeResource;
+use App\Model\User;
+use App\Model\UserMapFields;
+use App\Model\Nation;
+use App\Model\MapFieldPopulation;
+use App\Model\GameResource;
 use Illuminate\Support\Collection;
 
 class MapController extends Controller
@@ -74,20 +79,31 @@ class MapController extends Controller
     		'map' => $map
     	]);
     }
-    public function info(){
-        $wood=MapFieldTypeResource::where('id',$id)
-        ->where('game_resorce_id',1)
-        ->value('count');
-        $clay=MapFieldTypeResource::where('id',$id)
-        ->where('game_resorce_id',2)
-        ->value('count');
-        $iron=MapFieldTypeResource::where('id',$id)
-        ->where('game_resorce_id',3)
-        ->value('count');
-        $corn=MapFieldTypeResource::where('id',$id)
-        ->where('game_resorce_id',4)
-        ->value('count');
-        
-        return view('info');
+    public function info(MapField $mapField){
+        $game_resources = GameResource::all();
+        //$map_field = ; 
+        $resources = $map_field->map_field_type()->resources;
+       if($mapField->type === 'new_village'){
+            $user_id = UserMapFields::where('map_field_id', $mapField->id)->value('user_id');
+            $village_owner = User::where('id', $user_id)->value('name');
+            $nat_id = User::where('id', $user_id)->value('nation_id');
+            $village_owner_nat = Nation::where('id', $nat_id)->value('name');
+            $population= MapFieldPopulation::where('map_field_id', $mapField->id)->value('population');
+            return view('info', compact(
+                'game_resources',
+                'village_owner',
+                'village_owner_nat',
+                'population',
+                'mapField',
+                'resources'
+            ));
+       }
+        else{
+            return view('info', compact(
+                'game_resources',
+                'mapField',
+                'resources'
+            ));
+        }
     }
 }

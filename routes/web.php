@@ -13,7 +13,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
+Route::get('/', function (){
     return view('welcome');
 });
 
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth', 'village', 'build_process_check', 'recoun
 
 	Route::get('/map', 'MapController@index')->name('maps.index');
 
-    Route::get('map/info','MapController@info')->name('info');
+    Route::get('map/{map_field}','MapController@info')->name('map_info');
 });
 
 Route::group(['middleware' => ['auth', 'no_village']], function () {
