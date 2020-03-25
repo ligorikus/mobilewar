@@ -8,11 +8,13 @@
             @endphp
             <div>
                 @if ($build !== null)
-                <a href="{{route('city.view', $build)}}">
-                    @if ($build->build_level->build->image !== null)
-                        <img src="{{asset('images/'.$build->build_level->build->image->url)}}" alt="">
-                    @endif
-                </a>
+                    <a href="{{route('city.view', $build)}}" class="build__img">
+                        @if ($build->build_level->build->image !== null)
+                            <img src="{{asset('images/'.$build->build_level->build->image->url)}}" alt="">
+                        @endif
+                        <span class="build">{{$build->build_level->level}}</span>
+
+                    </a>
                 @else
                     <img src="{{asset('images/empty_field.gif')}}" alt="">
                 @endif
