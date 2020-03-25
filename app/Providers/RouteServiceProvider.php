@@ -25,6 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::model('farm', \App\Model\MapFieldFarm::class);
         Route::model('build', \App\Model\MapFieldBuild::class);
+        Route::model('map_field', \App\Model\MapField::class);
 
         parent::boot();
     }
