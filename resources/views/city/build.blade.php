@@ -8,6 +8,7 @@
     </div>
     <div class="panel">
         <div class="item_panel">
+            @if ($next_level_build !== null)
             <span>{{trans('builds.upgrade_build')}}</span>
             <div class="item">
                 <span>{{trans('builds.build_level')}} {{$next_level_build->level}}</span>
@@ -36,7 +37,7 @@
                 </div>
                 <div>
                     <img src="{{asset('images/time.gif')}}" alt=""> :
-                    {{\Carbon\Carbon::createFromTimestamp($next_level_build->time->time)->format('H:i:s')}}
+                    {{\Carbon\Carbon::createFromTimestamp($build_time)->format('H:i:s')}}
                 </div>
                 <div>
                     @if ($not_enough_resources)
@@ -56,6 +57,9 @@
                     @endif
                 </div>
             </div>
+            @else
+                {{trans('builds.you_are_have_max_level_build')}}
+            @endif
         </div>
     </div>
 @endsection

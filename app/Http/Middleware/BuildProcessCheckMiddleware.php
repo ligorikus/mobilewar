@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Model\Build;
 use App\Model\BuildLevel;
 use App\Model\FarmLevel;
 use App\Model\GameResource;
@@ -36,9 +37,10 @@ class BuildProcessCheckMiddleware
      */
     public function handle($request, Closure $next)
     {
-        foreach ($map_field = auth()->user()->map_fields as $map_field) {
+        foreach (auth()->user()->map_fields as $map_field) {
             $build_processes = $map_field->build_processes;
             foreach ($build_processes->where('status', true) as $build_process) {
+                /** @var MapFieldBuild|MapFieldFarm $build */
                 $build = (new $build_process->build_type)->find($build_process->build_id);
                 $seconds_passed = Carbon::now()->timestamp - Carbon::parse($build_process->start_time)->timestamp;
 
@@ -52,6 +54,15 @@ class BuildProcessCheckMiddleware
                     default:
                         continue;
                 }
+                $builds = Build::all();
+                $main_building = $warehouse = $map_field
+                    ->builds
+                    ->where('build_level.build_id', $builds->where('title','main_building')->first()->id)
+                    ->first()
+                    ->build_level
+                    ->options
+                    ->first();
+
                 $build_level = $build_process->build_type === MapFieldBuild::class ? $build->build_level : $build->farm_level;
                 $build_type = get_class($build) === MapFieldBuild::class ? 'build' : 'farm';
                 $build_id_str = $build_type.'_id';
@@ -59,7 +70,7 @@ class BuildProcessCheckMiddleware
                     ->where($build_id_str, $build_level->$build_id_str)
                     ->where('level', $build_level->level+1)
                     ->first();
-                $seconds_left = $next_level_build->time->time - $seconds_passed;
+                $seconds_left = floor($next_level_build->time->time*(float)$main_building->value) - $seconds_passed;
 
                 if ($seconds_left <= 0) {
                     $recount_time = Carbon::parse($build_process->start_time)->addSeconds($next_level_build->time->time);
@@ -75,6 +86,7 @@ class BuildProcessCheckMiddleware
                     $population->save();
                     $build->$build_level_id = $next_level_build->id;
                     $build->save();
+                    $build->refresh();
                     if (isset($next_level_build->production)) {
                         $this->resourceService->recount_production($map_field, GameResource::find($build->farm_level->farm->game_resource_id));
                     }
