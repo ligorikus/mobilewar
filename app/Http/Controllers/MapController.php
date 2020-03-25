@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\MapField;
 use App\Model\MapFieldType;
+use App\Model\MapFieldTypeResource;
 
 class MapController extends Controller
 {
@@ -43,7 +44,8 @@ class MapController extends Controller
     				$map[$i][$j] = 'new_village';
     				continue;
     			}
-    			switch ($map_field_types->where('id', $map_field->map_field_type_id)->first()->name) {
+    			switch ($map_field_types->where('id', $map_field->map_field_type_id)->first(
+                )->name) {
     			 	case 'default':
     			 	case 'corn_land':
     			 	case 'super_corn_land':
@@ -70,5 +72,21 @@ class MapController extends Controller
     	return view('map', [
     		'map' => $map
     	]);
+    }
+    public function info(){
+        $wood=MapFieldTypeResource::where('id',$id)
+        ->where('game_resorce_id',1)
+        ->value('count');
+        $clay=MapFieldTypeResource::where('id',$id)
+        ->where('game_resorce_id',2)
+        ->value('count');
+        $iron=MapFieldTypeResource::where('id',$id)
+        ->where('game_resorce_id',3)
+        ->value('count');
+        $corn=MapFieldTypeResource::where('id',$id)
+        ->where('game_resorce_id',4)
+        ->value('count');
+        
+        return view('info');
     }
 }

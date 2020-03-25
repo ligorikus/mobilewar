@@ -7,15 +7,15 @@
 		@foreach($row as $col)
 			<div class="map__col">
 				@if ($col === 1)
-					<img src="/images/clay.gif" alt="clay" />
+					<a href="{{ route('info') }}"><img src="/images/clay.gif" alt="clay" /></a>
 				@elseif ($col === 2)
-					<img src="/images/wood.gif" alt="wood" />
+					<a href="{{ route('info') }}"><img src="/images/wood.gif" alt="wood" /></a>
 				@elseif ($col === 3)
-					<img src="/images/iron.gif" alt="iron" />
+					<a href="{{ route('info') }}"><img src="/images/iron.gif" alt="iron" /></a>
 				@elseif ($col === 'new_village')
-					<img src="/images/new_village.gif" alt="corn" />
+					<a href="{{ route('info') }}"><img src="/images/new_village.gif" alt="corn" /></a>
 				@else
-					<img src="/images/corn.gif" alt="corn" />
+					<a href="{{ route('info') }}"><img src="/images/corn.gif" alt="corn" /></a>
 				@endif
 			</div>
 		@endforeach

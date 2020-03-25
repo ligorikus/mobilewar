@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth', 'village', 'build_process_check', 'recoun
     Route::post('/build_construction/{build}', 'BuildController@build_construction')->name('build.build_construction');
 
 	Route::get('/map', 'MapController@index')->name('maps.index');
+
+    Route::get('map/info','MapController@info')->name('info');
 });
 
 Route::group(['middleware' => ['auth', 'no_village']], function () {
