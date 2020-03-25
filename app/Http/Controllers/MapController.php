@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\MapField;
 use App\Model\MapFieldType;
 use App\Model\MapFieldTypeResource;
+use Illuminate\Support\Collection;
 
 class MapController extends Controller
 {
@@ -41,32 +42,32 @@ class MapController extends Controller
     		for ($j = $start_y; $j <= $end_y; $j++) {
     			$map_field = $map_fields->where('x_coord', $i)->where('y_coord', $j)->first();
     			if ($map_field->users->count() > 0) {
-    				$map[$i][$j] = 'new_village';
+    				$map_field->type = 'new_village';
+                    $map[$i][$j] = $map_field;
     				continue;
     			}
     			switch ($map_field_types->where('id', $map_field->map_field_type_id)->first(
                 )->name) {
-    			 	case 'default':
-    			 	case 'corn_land':
-    			 	case 'super_corn_land':
-    			 		$map[$i][$j] = 0;
-    			 		break;
-    			 	case 'clay_land_less_wood':
+                    case 'clay_land_less_wood':
     			 	case 'clay_land_less_iron':
-    			 		$map[$i][$j] = 1;
+                        $map_field->type = 1;
     			 		break;
     			 	case 'wood_land_less_iron':
     			 	case 'wood_land_less_clay':
-    			 		$map[$i][$j] = 2;
+                        $map_field->type = 2;
     			 		break;
     			 	case 'iron_land_less_wood':
     			 	case 'iron_land_less_clay':
-    			 		$map[$i][$j] = 3;
+                        $map_field->type = 3;
     			 		break;
-    			 	default:
-    			 		$map[$i][$j] = 0;
+                    case 'super_corn_land':
+                    case 'corn_land':
+                    case 'default':
+                    default:
+                        $map_field->type = 0;
     			 		break;
-    			 } 
+    			 }
+    			$map[$i][$j] = $map_field;
     		}
     	}
     	return view('map', [

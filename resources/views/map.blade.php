@@ -4,15 +4,15 @@
 <div class="map">
 	@foreach($map as $row)
 		<div class="map__row">
-		@foreach($row as $col)
+		@foreach($row as $map_field)
 			<div class="map__col">
-				@if ($col === 1)
+				@if ($map_field->type === 1)
 					<a href="{{ route('info') }}"><img src="/images/clay.gif" alt="clay" /></a>
-				@elseif ($col === 2)
+				@elseif ($map_field->type === 2)
 					<a href="{{ route('info') }}"><img src="/images/wood.gif" alt="wood" /></a>
-				@elseif ($col === 3)
+				@elseif ($map_field->type === 3)
 					<a href="{{ route('info') }}"><img src="/images/iron.gif" alt="iron" /></a>
-				@elseif ($col === 'new_village')
+				@elseif ($map_field->type === 'new_village')
 					<a href="{{ route('info') }}"><img src="/images/new_village.gif" alt="corn" /></a>
 				@else
 					<a href="{{ route('info') }}"><img src="/images/corn.gif" alt="corn" /></a>
