@@ -15,12 +15,13 @@ class FarmController extends Controller
         return view('farms.index', compact('map_field'));
     }
 
-    public function view(MapFieldFarm $farm)
+    public function view($index)
     {
-        $farm->refresh();
-        $farm->load('farm_level');
         $game_resources = GameResource::all();
         $map_field = auth()->user()->map_fields()->first();
+        $farm = $map_field->farms->where('index', $index-1)->first();
+        $farm->refresh();
+        $farm->load('farm_level');
         $build_processes = $map_field->build_processes;
         $current_build = $build_processes->where('build_type', get_class($farm))->where('build_id', $farm->id)->count();
         $resources = $map_field->resources;

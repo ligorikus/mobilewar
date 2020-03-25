@@ -8,7 +8,7 @@
             @endphp
             <div>
                 @if ($build !== null)
-                    <a href="{{route('city.view', $build)}}" class="build__img">
+                    <a href="{{route('city.view', $index+1)}}" class="build__img">
                         @if ($build->build_level->build->image !== null)
                             <img src="{{asset('images/'.$build->build_level->build->image->url)}}" alt="">
                         @endif

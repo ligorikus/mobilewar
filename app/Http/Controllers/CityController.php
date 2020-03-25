@@ -17,12 +17,13 @@ class CityController extends Controller
         return view('city.index', compact('map_field'));
     }
 
-    public function view(MapFieldBuild $build)
+    public function view($index)
     {
-        $build->refresh();
-        $build->load('build_level');
         $game_resources = GameResource::all();
         $map_field = auth()->user()->map_fields()->first();
+        $build = $map_field->builds->where('index', $index-1)->first();
+        $build->refresh();
+        $build->load('build_level');
         $build_processes = $map_field->build_processes;
         $current_build = $build_processes->where('build_type', get_class($build))->where('build_id', $build->id)->count();
         $resources = $map_field->resources;
