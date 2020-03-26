@@ -80,30 +80,32 @@ class MapController extends Controller
     	]);
     }
     public function info(MapField $mapField){
-        $game_resources = GameResource::all();
-        //$map_field = ; 
-        $resources = $map_field->map_field_type()->resources;
-       if($mapField->type === 'new_village'){
-            $user_id = UserMapFields::where('map_field_id', $mapField->id)->value('user_id');
-            $village_owner = User::where('id', $user_id)->value('name');
-            $nat_id = User::where('id', $user_id)->value('nation_id');
-            $village_owner_nat = Nation::where('id', $nat_id)->value('name');
-            $population= MapFieldPopulation::where('map_field_id', $mapField->id)->value('population');
-            return view('info', compact(
-                'game_resources',
-                'village_owner',
-                'village_owner_nat',
-                'population',
-                'mapField',
-                'resources'
-            ));
-       }
-        else{
-            return view('info', compact(
-                'game_resources',
-                'mapField',
-                'resources'
-            ));
+        $game_resources = GameResource::all(); 
+        $resources = $mapField->map_field_type()->resources;
+        $map_field_id = $mapField->id;
+        $villages = UserMapFields::all();
+        foreach ($villages as $village) {
+            if($village->map_field_id === $mapField->id){
+                $user_id = UserMapFields::where('map_field_id', $mapField->id)->value('user_id');
+                $village_owner = User::where('id', $user_id)->value('name');
+                $nat_id = User::where('id', $user_id)->value('nation_id');
+                $village_owner_nat = Nation::where('id', $nat_id)->value('name');
+                $population= MapFieldPopulation::where('map_field_id', $mapField->id)->value('population');
+                return view('info', compact(
+                    'game_resources',
+                    'village_owner',
+                    'village_owner_nat',
+                    'population',
+                    'map_field_id',
+                    'resources',
+                    'villages'
+                ));
+            }
         }
+        return view('info', compact(
+            'game_resources',
+            'map_field_id',
+            'resources'
+        ));
     }
 }

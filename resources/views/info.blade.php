@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if($mapField->type === 'new_village')
+ @if(isset($village_owner))
 <div class="panel">
 	Посление
 	<div class="item_panel">
