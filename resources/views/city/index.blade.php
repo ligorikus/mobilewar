@@ -16,7 +16,9 @@
 
                     </a>
                 @else
-                    <img src="{{asset('images/empty_field.gif')}}" alt="">
+                    <a href="{{route('city.view', $index+1)}}" class="build__img">
+                        <img src="{{asset('images/empty_field.gif')}}" alt="">
+                    </a>
                 @endif
 
             </div>

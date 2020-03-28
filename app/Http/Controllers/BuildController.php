@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Build;
 use App\Model\BuildLevel;
 use App\Model\BuildProcess;
 use App\Model\FarmLevel;
@@ -15,14 +16,20 @@ use App\Model\MapFieldEntity;
 
 class BuildController extends Controller
 {
-    public function build_farm(MapFieldFarm $farm)
+    public function upgrade_farm(MapFieldFarm $farm)
     {
     	return $this->build($farm);
     }
 
-    public function build_construction(MapFieldBuild $build)
+    public function upgrade_construction($index)
     {
+        $build = auth()->user()->map_fields()->first()->builds->where('index', $index)->first();
     	return $this->build($build);
+    }
+
+    public function build_construction($index, Build $build)
+    {
+        dd($build);
     }
 
     private function build(MapFieldEntity $entity)

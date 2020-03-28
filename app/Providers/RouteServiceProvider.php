@@ -23,8 +23,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::model('farm', \App\Model\MapFieldFarm::class);
-        Route::model('build', \App\Model\MapFieldBuild::class);
+        Route::model('farm', \App\Model\Farm::class);
+        Route::model('build', \App\Model\Build::class);
 
         parent::boot();
     }

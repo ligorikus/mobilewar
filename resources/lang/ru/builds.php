@@ -14,6 +14,7 @@ return [
     'builders_are_busy' => 'Строители заняты',
     'not_enough_resources' => 'Недостаточно ресурсов',
     'you_are_have_max_level_build' => 'У вас максимальный уровень этого здания!',
+    'available' => 'Доступные',
 
     'main_building' => 'Главное здание',
     'sawmill' => 'Лесопилка',

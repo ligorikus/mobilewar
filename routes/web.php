@@ -28,8 +28,10 @@ Route::group(['middleware' => ['auth', 'village', 'build_process_check', 'recoun
     Route::get('/city', 'CityController@index')->name('city.index');
     Route::get('/city/{index}', 'CityController@view')->name('city.view');
 
-    Route::post('/build_farm/{farm}', 'BuildController@build_farm')->name('build.build_farm');
-    Route::post('/build_construction/{build}', 'BuildController@build_construction')->name('build.build_construction');
+    Route::post('/build_construction/{index}/{build}', 'BuildController@build_construction')->name('build.build_construction');
+
+    Route::post('/upgrade_farm/{index}', 'BuildController@build_farm')->name('build.upgrade_farm');
+    Route::post('/upgrade_construction/{index}', 'BuildController@upgrade_construction')->name('build.upgrade_construction');
 
 	Route::get('/map', 'MapController@index')->name('maps.index');
 });

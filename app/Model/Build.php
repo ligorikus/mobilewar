@@ -14,6 +14,11 @@ class Build extends Model
 {
     public $timestamps = false;
 
+    public function conditions()
+    {
+        return $this->hasMany(BuildConstructionCondition::class);
+    }
+
     public function levels()
     {
         return $this->hasMany(BuildLevel::class);
