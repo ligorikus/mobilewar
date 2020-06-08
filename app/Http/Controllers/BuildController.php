@@ -7,24 +7,24 @@ use App\Model\BuildLevel;
 use App\Model\BuildProcess;
 use App\Model\FarmLevel;
 use App\Model\MapField;
+use App\Model\MapFieldBuild;
+use App\Model\MapFieldEntity;
+use App\Model\MapFieldFarm;
 use App\Model\MapFieldResource;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Model\MapFieldBuild;
-use App\Model\MapFieldFarm;
-use App\Model\MapFieldEntity;
 
 class BuildController extends Controller
 {
     public function upgrade_farm(MapFieldFarm $farm)
     {
-    	return $this->build($farm);
+        return $this->build($farm);
     }
 
     public function upgrade_construction($index)
     {
         $build = auth()->user()->map_fields()->first()->builds->where('index', $index)->first();
-    	return $this->build($build);
+
+        return $this->build($build);
     }
 
     public function build_construction($index, Build $build)
@@ -53,20 +53,19 @@ class BuildController extends Controller
             $build_id_str = $build_type.'_id';
             $next_level_build = $next_level_build_process = $level_class::with(['time', 'resources'])
                 ->where($build_type.'_id', $build_level->$build_id_str)
-                ->where('level', $build_level->level+1)
+                ->where('level', $build_level->level + 1)
                 ->first();
             $resources = $map_field->resources;
             $values = [];
             /** @var MapFieldResource $resource */
             foreach ($resources as $resource) {
                 $values[$resource->game_resource_id] = $next_level_build->resources->where('game_resource_id', $resource->game_resource_id)->first()->value;
-                if ((int)$resource->value < (int)$values[$resource->game_resource_id]) {
+                if ((int) $resource->value < (int) $values[$resource->game_resource_id]) {
                     return redirect()->back();
                 }
-
             }
             foreach ($resources as $resource) {
-                $resource->value -= (int)$values[$resource->game_resource_id];
+                $resource->value -= (int) $values[$resource->game_resource_id];
                 $resource->save();
             }
 
@@ -83,27 +82,28 @@ class BuildController extends Controller
                     default:
                         return redirect()->back();
                 }
-                $build = (new $build_process->build_type)->find($build_process->build_id);
+                $build = (new $build_process->build_type())->find($build_process->build_id);
                 $build_type_process = get_class($build) === MapFieldBuild::class ? 'build' : 'farm';
                 $build_level_process = $build_process->build_type === MapFieldBuild::class ? $build->build_level : $build->farm_level;
                 $build_id_process_str = $build_type_process.'_id';
                 $next_level_build_process = $level_class_process::with(['time'])
                     ->where($build_id_process_str, $build_level_process->$build_id_process_str)
-                    ->where('level', $build_level_process->level+1)
+                    ->where('level', $build_level_process->level + 1)
                     ->first();
 
-                $start_time->addSeconds(Carbon::parse($build_process->start_time)->addSeconds($next_level_build_process->time->time)->diffInSeconds(Carbon::now())+1);
+                $start_time->addSeconds(Carbon::parse($build_process->start_time)->addSeconds($next_level_build_process->time->time)->diffInSeconds(Carbon::now()) + 1);
             }
 
-        	$process = $map_field->build_processes()->create([
-        		'build_id' => $entity->id,
-        		'build_type' => get_class($entity),
-        		'progress' => 0,
-        		'status' => true,
-                'start_time' => $start_time
-        	]);
-        	$map_field->build_processes->push($process);
+            $process = $map_field->build_processes()->create([
+                'build_id'   => $entity->id,
+                'build_type' => get_class($entity),
+                'progress'   => 0,
+                'status'     => true,
+                'start_time' => $start_time,
+            ]);
+            $map_field->build_processes->push($process);
         }
+
         return redirect()->back();
     }
 }

@@ -1,14 +1,13 @@
 <?php
 
-
 namespace App\Http\View\Composer;
+
 use App\Model\BuildLevel;
-use App\Model\BuildProcess;
 use App\Model\FarmLevel;
 use App\Model\MapFieldBuild;
 use App\Model\MapFieldFarm;
+use Carbon\Carbon;
 use Illuminate\View\View;
-use \Carbon\Carbon;
 
 class BuilderComposer
 {
@@ -17,7 +16,7 @@ class BuilderComposer
         $build_process = auth()->user()->map_fields()->first()->build_processes->first();
         $view->with('build_process', $build_process);
         if ($build_process !== null) {
-            $build = (new $build_process->build_type)->find($build_process->build_id);
+            $build = (new $build_process->build_type())->find($build_process->build_id);
             $seconds_passed = Carbon::now()->timestamp - Carbon::parse($build_process->start_time)->timestamp;
 
             switch ($build_process->build_type) {
@@ -36,15 +35,15 @@ class BuilderComposer
             $build_id_str = $build_type.'_id';
             $next_level_build = $level_class::with(['time'])
                 ->where($build_id_str, $build_level->$build_id_str)
-                ->where('level', $build_level->level+1)
+                ->where('level', $build_level->level + 1)
                 ->first();
             $seconds_left = $next_level_build->time->time - $seconds_passed;
 
             $view->with([
-                'type' => $build_process->build_type === MapFieldBuild::class ? 'build' : 'farm',
-                'build' => $build,
-                'build_level' => $build_level,
-                'seconds_left' => $seconds_left
+                'type'         => $build_process->build_type === MapFieldBuild::class ? 'build' : 'farm',
+                'build'        => $build,
+                'build_level'  => $build_level,
+                'seconds_left' => $seconds_left,
             ]);
         }
     }

@@ -5,35 +5,34 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class FarmLevel
- * @package App\Model
+ * Class FarmLevel.
  *
- * @property integer $level
+ * @property int $level
  */
 class FarmLevel extends Model
 {
-	public $timestamps = false;
+    public $timestamps = false;
 
-	protected $with = [
-	    'farm'
+    protected $with = [
+        'farm',
     ];
 
-	public function farm()
+    public function farm()
     {
         return $this->belongsTo(Farm::class);
     }
 
-	public function resources()
-	{
-		return $this->hasMany(FarmLevelConstructionResource::class);
-	}
+    public function resources()
+    {
+        return $this->hasMany(FarmLevelConstructionResource::class);
+    }
 
-	public function time()
-	{
-		return $this->hasOne(FarmLevelConstructionTime::class);
-	}
+    public function time()
+    {
+        return $this->hasOne(FarmLevelConstructionTime::class);
+    }
 
-	public function map_field()
+    public function map_field()
     {
         return $this->hasMany(MapFieldFarm::class);
     }

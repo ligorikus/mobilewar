@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class MapFieldTypeResource extends Model
 {
-	public $timestamps = false;
+    public $timestamps = false;
 
     public function type()
     {
-    	return $this->belongsTo(MapFieldType::class);
+        return $this->belongsTo(MapFieldType::class);
     }
 }

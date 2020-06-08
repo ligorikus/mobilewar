@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,9 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'village', 'build_process_check', 'recounting_resources']], function () {
-	Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
-	Route::get('/farms', 'FarmController@index')->name('farms.index');
+    Route::get('/farms', 'FarmController@index')->name('farms.index');
     Route::get('/farms/{index}', 'FarmController@view')->name('farms.view');
 
     Route::get('/city', 'CityController@index')->name('city.index');
@@ -33,9 +33,9 @@ Route::group(['middleware' => ['auth', 'village', 'build_process_check', 'recoun
     Route::post('/upgrade_farm/{index}', 'BuildController@build_farm')->name('build.upgrade_farm');
     Route::post('/upgrade_construction/{index}', 'BuildController@upgrade_construction')->name('build.upgrade_construction');
 
-	Route::get('/map', 'MapController@index')->name('maps.index');
+    Route::get('/map', 'MapController@index')->name('maps.index');
 });
 
 Route::group(['middleware' => ['auth', 'no_village']], function () {
-	Route::get('/village/create', 'VillageController@create_first')->name('village.create.first');
+    Route::get('/village/create', 'VillageController@create_first')->name('village.create.first');
 });

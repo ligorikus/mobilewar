@@ -2,6 +2,6 @@
 
 namespace App\Model;
 
-interface MapFieldEntity {
-	
+interface MapFieldEntity
+{
 }

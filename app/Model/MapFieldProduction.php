@@ -8,6 +8,6 @@ class MapFieldProduction extends Model
 {
     protected $fillable = [
         'production',
-        'game_resource_id'
+        'game_resource_id',
     ];
 }

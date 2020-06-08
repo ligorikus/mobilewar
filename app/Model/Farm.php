@@ -10,7 +10,7 @@ class Farm extends Model
 
     public function levels()
     {
-    	return $this->hasMany(FarmLevel::class);
+        return $this->hasMany(FarmLevel::class);
     }
 
     public function resource()

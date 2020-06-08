@@ -9,7 +9,7 @@ class MapFieldResource extends Model
     protected $fillable = [
         'value',
         'game_resource_id',
-        'updated_at'
+        'updated_at',
     ];
 
     public function game_resource()

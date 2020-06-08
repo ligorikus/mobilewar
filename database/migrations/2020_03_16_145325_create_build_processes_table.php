@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateBuildProcessesTable extends Migration
 {
@@ -22,7 +22,7 @@ class CreateBuildProcessesTable extends Migration
             $table->boolean('status')->default(false);
             $table->timestamp('start_time');
             $table->timestamps();
-            
+
             $table->foreign('map_field_id')
                 ->references('id')
                 ->on('map_fields')

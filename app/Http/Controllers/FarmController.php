@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Model\FarmLevel;
 use App\Model\GameResource;
-use App\Model\MapFieldFarm;
-use Illuminate\Http\Request;
 
 class FarmController extends Controller
 {
     public function index()
     {
-    	$map_field = auth()->user()->map_fields()->with('farms')->first();
+        $map_field = auth()->user()->map_fields()->with('farms')->first();
+
         return view('farms.index', compact('map_field'));
     }
 
@@ -19,7 +18,7 @@ class FarmController extends Controller
     {
         $game_resources = GameResource::all();
         $map_field = auth()->user()->map_fields()->first();
-        $farm = $map_field->farms->where('index', $index-1)->first();
+        $farm = $map_field->farms->where('index', $index - 1)->first();
         $farm->refresh();
         $farm->load('farm_level');
         $build_processes = $map_field->build_processes;
@@ -28,7 +27,7 @@ class FarmController extends Controller
 
         $next_level_farm = FarmLevel::with('resources')
             ->where('farm_id', $farm->farm_level->farm_id)
-            ->where('level', $farm->farm_level->level+1)
+            ->where('level', $farm->farm_level->level + 1)
             ->first();
 
         return view('farms.farm', compact(

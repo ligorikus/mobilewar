@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services;
 
 use App\Model\Build;
@@ -12,7 +11,7 @@ use Carbon\Carbon;
 class ResourceService
 {
     /**
-     * @param MapField $mapField
+     * @param MapField    $mapField
      * @param Carbon|null $recount_time
      */
     public function recount(MapField $mapField, Carbon $recount_time = null)
@@ -28,14 +27,14 @@ class ResourceService
             $builds = Build::all();
             $warehouse = $mapField
                 ->builds
-                ->where('build_level.build_id', $builds->where('title','warehouse')->first()->id)
+                ->where('build_level.build_id', $builds->where('title', 'warehouse')->first()->id)
                 ->first()
                 ->build_level
                 ->options
                 ->first();
             $barn = $mapField
                 ->builds
-                ->where('build_level.build_id', $builds->where('title','barn')->first()->id)
+                ->where('build_level.build_id', $builds->where('title', 'barn')->first()->id)
                 ->first()
                 ->build_level
                 ->options
@@ -54,9 +53,9 @@ class ResourceService
 
             if ($production_passed > 0) {
                 $predicted_value = $resource->value + $production_passed;
-                $resource->value = $predicted_value > (int)$limiter->value ? (int)$limiter->value : $predicted_value;
-            } elseif ($resource->value > (int)$limiter->value) {
-                $resource->value = (int)$limiter->value;
+                $resource->value = $predicted_value > (int) $limiter->value ? (int) $limiter->value : $predicted_value;
+            } elseif ($resource->value > (int) $limiter->value) {
+                $resource->value = (int) $limiter->value;
             }
             $resource->save(['timestamps' => false]);
         }
@@ -74,6 +73,7 @@ class ResourceService
         $mapFieldProduction = $mapField->productions()->where('game_resource_id', $resource->id)->first();
         $mapFieldProduction->production = $production;
         $mapFieldProduction->save();
+
         return $production;
     }
 }
