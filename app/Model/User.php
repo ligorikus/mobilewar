@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'gender', 'nation_id'
+        'name', 'email', 'password', 'gender', 'nation_id',
     ];
 
     /**
@@ -32,7 +32,7 @@ class User extends Authenticatable
         return $this->belongsToMany(MapField::class, 'user_map_fields')->withTimestamps();
     }
 
-    public function nation ()
+    public function nation()
     {
         return $this->belongsTo(Nation::class);
     }

@@ -50,15 +50,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'village' => \App\Http\Middleware\VillageMiddleware::class,
-        'no_village' => \App\Http\Middleware\NoVillageMiddleware::class,
+        'auth'                 => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth.basic'           => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'             => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'                  => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'                => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'             => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'village'              => \App\Http\Middleware\VillageMiddleware::class,
+        'no_village'           => \App\Http\Middleware\NoVillageMiddleware::class,
         'recounting_resources' => \App\Http\Middleware\RecountingResources::class,
-        'build_process_check' => \App\Http\Middleware\BuildProcessCheckMiddleware::class,
+        'build_process_check'  => \App\Http\Middleware\BuildProcessCheckMiddleware::class,
     ];
 }

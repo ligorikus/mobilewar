@@ -5,8 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class BuildConstructionCondition
- * @package App\Model
+ * Class BuildConstructionCondition.
  *
  * @property int $build_id
  * @property int $build_condition_id
@@ -23,7 +22,7 @@ class BuildConstructionCondition extends Model
         'build_condition_type',
         'level',
         'not_build',
-        'only_not_capital'
+        'only_not_capital',
     ];
 
     public $timestamps = false;

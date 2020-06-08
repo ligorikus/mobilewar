@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Model\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Model\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -42,33 +42,36 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255|alpha_num|unique:users',
+            'name'     => 'required|string|max:255|alpha_num|unique:users',
             'password' => 'required|string|min:6',
-            'nation' => 'required',
-            'gender' => 'required'
+            'nation'   => 'required',
+            'gender'   => 'required',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['name'],
-            'password' => bcrypt($data['password']),
-            'nation_id' => (int)$data['nation'],
-            'gender' => (int)$data['gender']
+            'name'      => $data['name'],
+            'password'  => bcrypt($data['password']),
+            'nation_id' => (int) $data['nation'],
+            'gender'    => (int) $data['gender'],
         ]);
+
         return $user;
     }
 }

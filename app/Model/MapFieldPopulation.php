@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MapFieldPopulation extends Model
 {
     protected $fillable = [
-        'population'
+        'population',
     ];
 
     public function setPopulation($population)

@@ -22,17 +22,20 @@ class BuildProcessCheckMiddleware
 
     /**
      * RecountingResources constructor.
+     *
      * @param ResourceService $resourceService
      */
     public function __construct(ResourceService $resourceService)
     {
         $this->resourceService = $resourceService;
     }
+
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -41,7 +44,7 @@ class BuildProcessCheckMiddleware
             $build_processes = $map_field->build_processes;
             foreach ($build_processes->where('status', true) as $build_process) {
                 /** @var MapFieldBuild|MapFieldFarm $build */
-                $build = (new $build_process->build_type)->find($build_process->build_id);
+                $build = (new $build_process->build_type())->find($build_process->build_id);
                 $seconds_passed = Carbon::now()->timestamp - Carbon::parse($build_process->start_time)->timestamp;
 
                 switch ($build_process->build_type) {
@@ -57,7 +60,7 @@ class BuildProcessCheckMiddleware
                 $builds = Build::all();
                 $main_building = $warehouse = $map_field
                     ->builds
-                    ->where('build_level.build_id', $builds->where('title','main_building')->first()->id)
+                    ->where('build_level.build_id', $builds->where('title', 'main_building')->first()->id)
                     ->first()
                     ->build_level
                     ->options
@@ -68,9 +71,9 @@ class BuildProcessCheckMiddleware
                 $build_id_str = $build_type.'_id';
                 $next_level_build = $level_class::with(['time'])
                     ->where($build_id_str, $build_level->$build_id_str)
-                    ->where('level', $build_level->level+1)
+                    ->where('level', $build_level->level + 1)
                     ->first();
-                $seconds_left = floor($next_level_build->time->time*(float)$main_building->value) - $seconds_passed;
+                $seconds_left = floor($next_level_build->time->time * (float) $main_building->value) - $seconds_passed;
 
                 if ($seconds_left <= 0) {
                     $recount_time = Carbon::parse($build_process->start_time)->addSeconds($next_level_build->time->time);
@@ -95,6 +98,7 @@ class BuildProcessCheckMiddleware
                 }
             }
         }
+
         return $next($request);
     }
 }

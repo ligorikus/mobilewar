@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Model\GameResource;
+use Illuminate\Database\Seeder;
 
 class GameResourceSeeder extends Seeder
 {
@@ -12,17 +12,17 @@ class GameResourceSeeder extends Seeder
      */
     public function run()
     {
-    	GameResource::create([
-        	'title' => 'wood'
+        GameResource::create([
+            'title' => 'wood',
         ]);
         GameResource::create([
-        	'title' => 'clay'
+            'title' => 'clay',
         ]);
         GameResource::create([
-        	'title' => 'iron'
+            'title' => 'iron',
         ]);
         GameResource::create([
-        	'title' => 'corn'
+            'title' => 'corn',
         ]);
     }
 }

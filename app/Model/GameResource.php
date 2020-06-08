@@ -2,14 +2,12 @@
 
 namespace App\Model;
 
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class GameResource
- * @package App\Model
+ * Class GameResource.
  *
- * @property integer $id
+ * @property int $id
  * @property string $title
  *
  * @method static create(array $attributes = [])
@@ -20,7 +18,7 @@ class GameResource extends Model
 
     public function farms()
     {
-    	return $this->hasMany(Farm::class);
+        return $this->hasMany(Farm::class);
     }
 
     public function user_resources()

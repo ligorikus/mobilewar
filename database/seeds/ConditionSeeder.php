@@ -49,233 +49,233 @@ class ConditionSeeder extends Seeder
         $conditions = [
             $sawmill->id => [
                 [
-                    'id' => $wood_farm->id,
-                    'type' => 'farm',
-                    'level' => 10
+                    'id'    => $wood_farm->id,
+                    'type'  => 'farm',
+                    'level' => 10,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
             ],
             $brickworks->id => [
                 [
-                    'id' => $clay_farm->id,
-                    'type' => 'farm',
-                    'level' => 10
+                    'id'    => $clay_farm->id,
+                    'type'  => 'farm',
+                    'level' => 10,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
             ],
             $iron_foundry->id => [
                 [
-                    'id' => $iron_farm->id,
-                    'type' => 'farm',
-                    'level' => 10
+                    'id'    => $iron_farm->id,
+                    'type'  => 'farm',
+                    'level' => 10,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
             ],
             $flour_mill->id => [
                 [
-                    'id' => $corn_farm->id,
-                    'type' => 'farm',
-                    'level' => 5
+                    'id'    => $corn_farm->id,
+                    'type'  => 'farm',
+                    'level' => 5,
                 ],
             ],
             $bakery->id => [
                 [
-                    'id' => $corn_farm->id,
-                    'type' => 'farm',
-                    'level' => 10
+                    'id'    => $corn_farm->id,
+                    'type'  => 'farm',
+                    'level' => 10,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
                 [
-                    'id' => $flour_mill->id,
-                    'type' => 'build',
-                    'level' => 5
-                ]
+                    'id'    => $flour_mill->id,
+                    'type'  => 'build',
+                    'level' => 5,
+                ],
             ],
             $arena->id => [
                 [
-                    'id' => $collection_point->id,
-                    'type' => 'build',
-                    'level' => 15
+                    'id'    => $collection_point->id,
+                    'type'  => 'build',
+                    'level' => 15,
                 ],
             ],
             $barracks->id => [
                 [
-                    'id' => $collection_point->id,
-                    'type' => 'build',
-                    'level' => 1
+                    'id'    => $collection_point->id,
+                    'type'  => 'build',
+                    'level' => 1,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 3
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 3,
                 ],
             ],
             $big_barracks->id => [
                 [
-                    'id' => $barracks->id,
-                    'type' => 'build',
-                    'level' => 20,
-                    'only_not_capital' => true
+                    'id'               => $barracks->id,
+                    'type'             => 'build',
+                    'level'            => 20,
+                    'only_not_capital' => true,
                 ],
             ],
             $tavern->id => [
                 [
-                    'id' => $collection_point->id,
-                    'type' => 'build',
-                    'level' => 1
+                    'id'    => $collection_point->id,
+                    'type'  => 'build',
+                    'level' => 1,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 3
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 3,
                 ],
             ],
             $barn->id => [
                 [
-                    'id' => $barn->id,
-                    'type' => 'build',
-                    'level' => 20
+                    'id'    => $barn->id,
+                    'type'  => 'build',
+                    'level' => 20,
                 ],
             ],
             $warehouse->id => [
                 [
-                    'id' => $warehouse->id,
-                    'type' => 'build',
-                    'level' => 20
+                    'id'    => $warehouse->id,
+                    'type'  => 'build',
+                    'level' => 20,
                 ],
             ],
             $market->id => [
                 [
-                    'id' => $warehouse->id,
-                    'type' => 'build',
-                    'level' => 1
+                    'id'    => $warehouse->id,
+                    'type'  => 'build',
+                    'level' => 1,
                 ],
                 [
-                    'id' => $barn->id,
-                    'type' => 'build',
-                    'level' => 1
+                    'id'    => $barn->id,
+                    'type'  => 'build',
+                    'level' => 1,
                 ],
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 3
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 3,
                 ],
             ],
             $embassy->id => [
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 1
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 1,
                 ],
             ],
             $residence->id => [
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
                 [
-                    'id' => $palace->id,
-                    'type' => 'build',
-                    'level' => 1,
-                    'not_build' => true
+                    'id'        => $palace->id,
+                    'type'      => 'build',
+                    'level'     => 1,
+                    'not_build' => true,
                 ],
             ],
             $palace->id => [
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
                 [
-                    'id' => $residence->id,
-                    'type' => 'build',
+                    'id'        => $residence->id,
+                    'type'      => 'build',
+                    'level'     => 1,
+                    'not_build' => true,
+                ],
+                [
+                    'id'    => $embassy->id,
+                    'type'  => 'build',
                     'level' => 1,
-                    'not_build' => true
                 ],
-                [
-                    'id' => $embassy->id,
-                    'type' => 'build',
-                    'level' => 1
-                ]
             ],
             $academy->id = [
                 [
-                    'id' => $barracks->id,
-                    'type' => 'build',
-                    'level' => 3
+                    'id'    => $barracks->id,
+                    'type'  => 'build',
+                    'level' => 3,
                 ],
             ],
             $forge->id => [
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 3
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 3,
                 ],
                 [
-                    'id' => $academy->id,
-                    'type' => 'build',
-                    'level' => 1
+                    'id'    => $academy->id,
+                    'type'  => 'build',
+                    'level' => 1,
                 ],
             ],
             $chamber_of_commerce->id => [
                 [
-                    'id' => $market->id,
-                    'type' => 'build',
-                    'level' => 20
+                    'id'    => $market->id,
+                    'type'  => 'build',
+                    'level' => 20,
                 ],
                 [
-                    'id' => $academy->id,
-                    'type' => 'build',
-                    'level' => 10
-                ]
+                    'id'    => $academy->id,
+                    'type'  => 'build',
+                    'level' => 10,
+                ],
             ],
             $workshop->id => [
                 [
-                    'id' => $main_building->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $main_building->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
                 [
-                    'id' => $academy->id,
-                    'type' => 'build',
-                    'level' => 10
-                ]
+                    'id'    => $academy->id,
+                    'type'  => 'build',
+                    'level' => 10,
+                ],
             ],
             $stable->id => [
                 [
-                    'id' => $forge->id,
-                    'type' => 'build',
-                    'level' => 3
+                    'id'    => $forge->id,
+                    'type'  => 'build',
+                    'level' => 3,
                 ],
                 [
-                    'id' => $academy->id,
-                    'type' => 'build',
-                    'level' => 5
+                    'id'    => $academy->id,
+                    'type'  => 'build',
+                    'level' => 5,
                 ],
             ],
             $big_stable->id => [
                 [
-                    'id' => $stable->id,
-                    'type' => 'build',
-                    'level' => 20,
-                    'only_not_capital' => true
+                    'id'               => $stable->id,
+                    'type'             => 'build',
+                    'level'            => 20,
+                    'only_not_capital' => true,
                 ],
             ],
         ];

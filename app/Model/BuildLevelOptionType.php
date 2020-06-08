@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class BuildLevelOptionType
- * @package App\Model
+ * Class BuildLevelOptionType.
  *
  * @method static create(array $attributes = [])
  * @method Builder where($column, $operator = null, $value = null, $boolean = 'and')

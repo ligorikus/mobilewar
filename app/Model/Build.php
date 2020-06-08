@@ -5,8 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Build
- * @package App\Model
+ * Class Build.
  *
  * @method static create(array $attributes = [])
  */
